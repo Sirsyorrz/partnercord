@@ -72,7 +72,7 @@ function buildSidebar(channels, activeId) {
 
   let html = '';
 
-  const statsHref = isChannelPage ? '../index.html' : 'index.html';
+  const statsHref = 'index.html';
   const statsActive = isStatsPage ? ' active' : '';
   html += `<a href="${statsHref}" class="stats-link${statsActive}">📊 <span>Statistics</span></a>`;
 

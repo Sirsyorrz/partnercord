@@ -13,6 +13,7 @@ let searchHits = [];        // indices into currentMessages of matching messages
 let searchHitSet = new Set(); // same as searchHits but as a Set of message IDs for quick DOM lookup
 let currentHitIndex = -1;   // which hit we're on (-1 = none)
 let activeSearchTerm = '';
+let activeHighlightTerm = ''; // text portion only, used by applySearchHighlights
 
 // ── Init ──────────────────────────────────────────────────────
 
@@ -121,6 +122,7 @@ function clearSearch() {
   searchHits = [];
   searchHitSet = new Set();
   currentHitIndex = -1;
+  activeHighlightTerm = '';
   clearSearchHighlights();
 
   const panel = document.getElementById('search-results-panel');
@@ -143,6 +145,108 @@ function clearSearchHighlights() {
   container.querySelectorAll('.search-hit-msg').forEach(el => el.classList.remove('search-hit-msg'));
 }
 
+// ── Search filter parser ──────────────────────────────────────
+
+function parseSearchQuery(q) {
+  const filters = {
+    text: '',
+    from: [],      // array of lowercase strings (OR logic)
+    before: null,  // ms timestamp (exclusive)
+    after: null,   // ms timestamp (exclusive)
+    during: null,  // { year, month } or { year, month: null }
+    has: new Set(), // 'link' | 'image' | 'embed'
+  };
+
+  // Extract filter tokens, collect remaining text
+  let remaining = q;
+  const tokenRe = /\b(from|before|after|during|has):(\S+)/gi;
+  const consumed = [];
+  let match;
+  while ((match = tokenRe.exec(q)) !== null) {
+    const key = match[1].toLowerCase();
+    const val = match[2];
+    consumed.push(match[0]);
+
+    if (key === 'from') {
+      filters.from.push(val.toLowerCase());
+    } else if (key === 'before') {
+      const ms = new Date(val).getTime();
+      if (!isNaN(ms)) filters.before = ms;
+    } else if (key === 'after') {
+      const ms = new Date(val).getTime();
+      if (!isNaN(ms)) filters.after = ms;
+    } else if (key === 'during') {
+      // YYYY-MM or YYYY
+      const mFull = val.match(/^(\d{4})-(\d{1,2})$/);
+      const mYear = val.match(/^(\d{4})$/);
+      if (mFull) filters.during = { year: parseInt(mFull[1]), month: parseInt(mFull[2]) - 1 };
+      else if (mYear) filters.during = { year: parseInt(mYear[1]), month: null };
+    } else if (key === 'has') {
+      const v = val.toLowerCase();
+      if (v === 'link' || v === 'image' || v === 'embed') filters.has.add(v);
+    }
+  }
+
+  // Remove consumed tokens from remaining text
+  for (const tok of consumed) {
+    remaining = remaining.replace(tok, '');
+  }
+  filters.text = remaining.replace(/\s+/g, ' ').trim();
+
+  return filters;
+}
+
+function filtersActive(filters) {
+  return (
+    filters.text !== '' ||
+    filters.from.length > 0 ||
+    filters.before !== null ||
+    filters.after !== null ||
+    filters.during !== null ||
+    filters.has.size > 0
+  );
+}
+
+function messageMatchesFilters(msg, filters) {
+  // Text match (plainText)
+  if (filters.text) {
+    const tl = filters.text.toLowerCase();
+    if (!msg.plainText || !msg.plainText.toLowerCase().includes(tl)) return false;
+  }
+
+  // from: — OR logic across multiple from values
+  if (filters.from.length > 0) {
+    const name = (msg.authorName || '').toLowerCase();
+    const uname = (msg.authorUsername || '').toLowerCase();
+    const matches = filters.from.some(f => name.includes(f) || uname.includes(f));
+    if (!matches) return false;
+  }
+
+  // before: / after: — timestamp range
+  if (filters.before !== null && msg.timestampMs >= filters.before) return false;
+  if (filters.after !== null && msg.timestampMs <= filters.after) return false;
+
+  // during: — year and optionally month
+  if (filters.during !== null) {
+    const d = new Date(msg.timestampMs);
+    if (d.getUTCFullYear() !== filters.during.year) return false;
+    if (filters.during.month !== null && d.getUTCMonth() !== filters.during.month) return false;
+  }
+
+  // has: — AND logic (message must satisfy all specified has filters)
+  if (filters.has.has('link')) {
+    if (!/https?:\/\//i.test((msg.plainText || '') + (msg.contentHtml || ''))) return false;
+  }
+  if (filters.has.has('image')) {
+    if (!/chatlog__embed-image/i.test(msg.contentHtml || '')) return false;
+  }
+  if (filters.has.has('embed')) {
+    if (!/chatlog__embed/i.test(msg.contentHtml || '')) return false;
+  }
+
+  return true;
+}
+
 // ── Channel search ────────────────────────────────────────────
 
 function doChannelSearch(q) {
@@ -154,19 +258,23 @@ function doChannelSearch(q) {
 
   clearSearchHighlights();
 
-  const ql = q.toLowerCase();
+  const filters = parseSearchQuery(q);
+
+  if (!filtersActive(filters)) {
+    clearSearch();
+    return;
+  }
+
+  // Only highlight the text portion (not filter tokens)
+  activeHighlightTerm = filters.text;
+
   searchHits = [];
   searchHitSet = new Set();
 
   for (let i = 0; i < currentMessages.length; i++) {
-    const m = currentMessages[i];
-    if (
-      (m.plainText && m.plainText.toLowerCase().includes(ql)) ||
-      (m.authorName && m.authorName.toLowerCase().includes(ql)) ||
-      (m.authorUsername && m.authorUsername.toLowerCase().includes(ql))
-    ) {
+    if (messageMatchesFilters(currentMessages[i], filters)) {
       searchHits.push(i);
-      searchHitSet.add(String(m.id));
+      searchHitSet.add(String(currentMessages[i].id));
     }
   }
 
@@ -174,9 +282,7 @@ function doChannelSearch(q) {
 
   if (searchHits.length === 0) return;
 
-  // Apply highlights to currently rendered messages
   applySearchHighlights();
-
   jumpToHit(0);
 }
 
@@ -251,9 +357,10 @@ function applySearchHighlights() {
   });
   container.querySelectorAll('.search-hit-msg').forEach(el => el.classList.remove('search-hit-msg'));
 
-  const ql = activeSearchTerm.toLowerCase();
-  const escapedQ = escapeRegex(activeSearchTerm);
-  const re = new RegExp(escapedQ, 'gi');
+  // Build text regex only from the text portion (not filter tokens)
+  const re = activeHighlightTerm
+    ? new RegExp(escapeRegex(activeHighlightTerm), 'gi')
+    : null;
 
   // Walk all rendered message containers
   container.querySelectorAll('.message-container').forEach(msgEl => {
@@ -262,9 +369,11 @@ function applySearchHighlights() {
 
     msgEl.classList.add('search-hit-msg');
 
-    // Highlight text inside .message-content and .message-header
-    const contentEl = msgEl.querySelector('.message-content');
-    if (contentEl) highlightTextInElement(contentEl, re);
+    // Highlight text inside .message-content only when there's a text term
+    if (re) {
+      const contentEl = msgEl.querySelector('.message-content');
+      if (contentEl) highlightTextInElement(contentEl, re);
+    }
   });
 }
 

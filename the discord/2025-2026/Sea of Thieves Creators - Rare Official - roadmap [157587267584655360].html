@@ -1,0 +1,954 @@
+<!DOCTYPE html><html lang=en><head><title>Sea of Thieves Creators - roadmap</title><meta charset=utf-8><meta name=viewport content="width=device-width"><style>@font-face{src:url("https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/ggsans-normal-400.woff2");font-family:gg sans;font-weight:400;font-style:normal}@font-face{src:url("https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/ggsans-normal-500.woff2");font-family:gg sans;font-weight:500;font-style:normal}@font-face{src:url("https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/ggsans-normal-600.woff2");font-family:gg sans;font-weight:600;font-style:normal}@font-face{src:url("https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/ggsans-normal-700.woff2");font-family:gg sans;font-weight:700;font-style:normal}@font-face{src:url("https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/ggsans-normal-800.woff2");font-family:gg sans;font-weight:800;font-style:normal}@font-face{src:url("https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/ggsans-italic-400.woff2");font-family:gg sans;font-weight:400;font-style:italic}@font-face{src:url("https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/ggsans-italic-500.woff2");font-family:gg sans;font-weight:500;font-style:italic}@font-face{src:url("https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/ggsans-italic-600.woff2");font-family:gg sans;font-weight:600;font-style:italic}@font-face{src:url("https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/ggsans-italic-700.woff2");font-family:gg sans;font-weight:700;font-style:italic}@font-face{src:url("https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/ggsans-italic-800.woff2");font-family:gg sans;font-weight:800;font-style:italic}html,body{margin:0;padding:0;background-color:#36393e;color:#dcddde;font-family:"gg sans","Helvetica Neue",Helvetica,Arial,sans-serif;font-size:17px;font-weight:400;scroll-behavior:smooth}a{color:#00aff4;text-decoration:none}a:hover{text-decoration:underline}img{object-fit:contain;image-rendering:high-quality;image-rendering:-webkit-optimize-contrast}.preamble{display:grid;grid-template-columns:auto 1fr;max-width:100%;padding:1rem}.preamble__guild-icon-container{grid-column:1}.preamble__guild-icon{max-width:88px;max-height:88px}.preamble__entries-container{grid-column:2;margin-left:1rem}.preamble__entry{margin-bottom:0.15rem;color:#ffffff;font-size:1.4rem}.preamble__entry--small{font-size:1rem}.chatlog{padding:1rem 0;width:100%;border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1)}.chatlog__message-group{margin-bottom:1rem}.chatlog__message-container{background-color:transparent;transition:background-color 1s ease}.chatlog__message-container--highlighted{background-color:rgba(114,137,218,0.2)}.chatlog__message-container--pinned{background-color:rgba(249,168,37,0.05)}.chatlog__message{display:grid;grid-template-columns:auto 1fr;padding:0.15rem 0;direction:ltr;unicode-bidi:bidi-override}.chatlog__message:hover{background-color:#32353b}.chatlog__message:hover .chatlog__short-timestamp{display:block}.chatlog__message-aside{grid-column:1;width:72px;padding:0.15rem 0.15rem 0 0.15rem;text-align:center}.chatlog__reply-symbol{height:10px;margin:6px 4px 4px 36px;border-left:2px solid #4f545c;border-top:2px solid #4f545c;border-radius:8px 0 0 0}.chatlog__avatar{width:40px;height:40px;border-radius:50%}.chatlog__short-timestamp{display:none;color:#a3a6aa;font-size:0.75rem;font-weight:500;direction:ltr;unicode-bidi:bidi-override}.chatlog__message-primary{grid-column:2;min-width:0}.chatlog__reply{display:flex;margin-bottom:0.15rem;align-items:center;color:#b5b6b8;font-size:0.875rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chatlog__reply-avatar{width:16px;height:16px;margin-right:0.25rem;border-radius:50%}.chatlog__reply-author{margin-right:0.3rem;font-weight:600}.chatlog__reply-content{overflow:hidden;text-overflow:ellipsis}.chatlog__reply-link{cursor:pointer}.chatlog__reply-link *{display:inline;pointer-events:none}.chatlog__reply-link .chatlog__markdown-quote{display:inline}.chatlog__reply-link .chatlog__markdown-pre{display:inline}.chatlog__reply-link:hover{color:#ffffff}.chatlog__reply-link:hover *:not(.chatlog__markdown-spoiler){color:inherit}.chatlog__reply-edited-timestamp{margin-left:0.25rem;color:#a3a6aa;font-size:0.75rem;font-weight:500;direction:ltr;unicode-bidi:bidi-override}.chatlog__system-notification-icon{width:18px;height:18px}.chatlog__system-notification-author{font-weight:500;color:#ffffff}.chatlog__system-notification-content{color:#96989d}.chatlog__system-notification-link{font-weight:500;color:#ffffff}.chatlog__system-notification-timestamp{margin-left:0.3rem;color:#a3a6aa;font-size:0.75rem;font-weight:500;direction:ltr;unicode-bidi:bidi-override}.chatlog__system-notification-timestamp a{color:inherit}.chatlog__header{margin-bottom:0.1rem}.chatlog__author{font-weight:500;color:#ffffff}.chatlog__author-tag{position:relative;top:-0.1rem;margin-left:0.3rem;padding:0.05rem 0.3rem;border-radius:3px;background-color:#5865F2;color:#ffffff;font-size:0.625rem;font-weight:500;line-height:1.3}.chatlog__timestamp{margin-left:0.3rem;color:#a3a6aa;font-size:0.75rem;font-weight:500;direction:ltr;unicode-bidi:bidi-override}.chatlog__timestamp a{color:inherit}.chatlog__content{padding-right:1rem;font-size:0.95rem;word-wrap:break-word}.chatlog__edited-timestamp{margin-left:0.15rem;color:#a3a6aa;font-size:0.75rem;font-weight:500}.chatlog__attachment{position:relative;width:fit-content;margin-top:0.3rem;border-radius:3px;overflow:hidden}.chatlog__attachment--hidden{cursor:pointer;box-shadow:0 0 1px 1px rgba(0,0,0,0.1)}.chatlog__attachment--hidden *{pointer-events:none}.chatlog__attachment-spoiler-caption{display:none;position:absolute;left:50%;top:50%;z-index:999;padding:0.4rem 0.8rem;border-radius:20px;transform:translate(-50%,-50%);background-color:rgba(0,0,0,0.9);color:#dcddde;font-size:0.9rem;font-weight:600;letter-spacing:0.05rem}.chatlog__attachment--hidden .chatlog__attachment-spoiler-caption{display:block}.chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption{color:#fff}.chatlog__attachment-media{max-width:45vw;max-height:500px;vertical-align:top;border-radius:3px}.chatlog__attachment--hidden .chatlog__attachment-media{filter:blur(44px)}.chatlog__attachment-generic{max-width:520px;width:100%;height:40px;padding:10px;border:1px solid #292b2f;border-radius:3px;background-color:#2f3136;overflow:hidden}.chatlog__attachment--hidden .chatlog__attachment-generic{filter:blur(44px)}.chatlog__attachment-generic-icon{float:left;width:30px;height:100%;margin-right:10px}.chatlog__attachment-generic-size{color:#72767d;font-size:12px}.chatlog__attachment-generic-name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.chatlog__embed{display:flex;margin-top:0.3rem;max-width:520px}.chatlog__embed-color-pill{flex-shrink:0;width:0.25rem;border-top-left-radius:3px;border-bottom-left-radius:3px}.chatlog__embed-color-pill--default{background-color:#202225}.chatlog__embed-content-container{display:flex;flex-direction:column;padding:0.5rem 0.6rem;border:1px solid rgba(46,48,54,0.6);border-top-right-radius:3px;border-bottom-right-radius:3px;background-color:rgba(46,48,54,0.3)}.chatlog__embed-content{display:flex;width:100%}.chatlog__embed-text{flex:1}.chatlog__embed-author-container{display:flex;margin-bottom:0.5rem;align-items:center}.chatlog__embed-author-icon{width:20px;height:20px;margin-right:0.5rem;border-radius:50%}.chatlog__embed-author{color:#ffffff;font-size:0.875rem;font-weight:600;direction:ltr;unicode-bidi:bidi-override}.chatlog__embed-author-link{color:#ffffff}.chatlog__embed-title{margin-bottom:0.5rem;color:#ffffff;font-size:0.875rem;font-weight:600}.chatlog__embed-description{color:#dcddde;font-weight:500;font-size:0.85rem}.chatlog__embed-fields{display:flex;flex-wrap:wrap;gap:0 0.5rem}.chatlog__embed-field{flex:0;min-width:100%;max-width:506px;padding-top:0.6rem;font-size:0.875rem}.chatlog__embed-field--inline{flex:1;flex-basis:auto;min-width:50px}.chatlog__embed-field-name{margin-bottom:0.2rem;color:#ffffff;font-weight:600}.chatlog__embed-field-value{color:#dcddde;font-weight:500}.chatlog__embed-thumbnail{flex:0;max-width:80px;max-height:80px;margin-left:1.2rem;border-radius:3px}.chatlog__embed-images{display:grid;margin-top:0.6rem;grid-template-columns:repeat(2,1fr);gap:0.25rem}.chatlog__embed-images--single{display:block}.chatlog__embed-image{object-fit:cover;object-position:center;max-width:500px;max-height:400px;width:100%;height:100%;border-radius:3px}.chatlog__embed-footer{margin-top:0.6rem;color:#dcddde}.chatlog__embed-footer-icon{width:20px;height:20px;margin-right:0.2rem;border-radius:50%;vertical-align:middle}.chatlog__embed-footer-text{vertical-align:middle;font-size:0.75rem;font-weight:500}.chatlog__embed-invite-container{min-width:320px;padding:0.6rem 0.7rem;border:1px solid rgba(46,48,54,0.6);border-radius:3px;background-color:rgba(46,48,54,0.3)}.chatlog__embed-invite-title{margin:0 0 0.8rem 0;color:#b9bbbe;font-size:0.75rem;font-weight:700;text-transform:uppercase}.chatlog__embed-invite{display:flex}.chatlog__embed-invite-guild-icon{width:50px;height:50px;border-radius:0.85rem}.chatlog__embed-invite-info{margin-left:1rem}.chatlog__embed-invite-guild-name{color:#ffffff;font-weight:600}.chatlog__embed-invite-guild-name a{color:inherit}.chatlog__embed-invite-channel-icon{width:18px;height:18px;vertical-align:bottom}.chatlog__embed-invite-channel-name{font-size:0.9rem;font-weight:600}.chatlog__embed-generic-image{object-fit:contain;object-position:left;max-width:45vw;max-height:500px;vertical-align:top;border-radius:3px}.chatlog__embed-generic-video{object-fit:contain;object-position:left;max-width:45vw;max-height:500px;vertical-align:top;border-radius:3px}.chatlog__embed-generic-gifv{object-fit:contain;object-position:left;max-width:45vw;max-height:500px;vertical-align:top;border-radius:3px}.chatlog__embed-spotify{border:0}.chatlog__embed-twitch{border:0}.chatlog__embed-youtube-container{margin-top:0.6rem}.chatlog__embed-youtube{border:0;border-radius:3px}.chatlog__sticker{width:180px;height:180px}.chatlog__sticker--media{max-width:100%;max-height:100%}.chatlog__reactions{display:flex}.chatlog__reaction{display:flex;margin:0.35rem 0.1rem 0.1rem 0;padding:0.125rem 0.375rem;border:1px solid transparent;border-radius:8px;background-color:#2f3136;align-items:center}.chatlog__reaction:hover{border:1px solid hsla(0,0%,100%,.2);background-color:transparent}.chatlog__reaction-count{min-width:9px;margin-left:0.35rem;color:#b9bbbe;font-size:0.875rem}.chatlog__reaction:hover .chatlog__reaction-count{color:#dcddde}.chatlog__markdown{max-width:100%;line-height:1.3;overflow-wrap:break-word}.chatlog__markdown h1{margin:1rem 0 0.5rem;color:#f2f3f5;font-size:1.5rem;line-height:1}.chatlog__markdown h2{margin:1rem 0 0.5rem;color:#f2f3f5;font-size:1.25rem;line-height:1}.chatlog__markdown h3{margin:1rem 0 0.5rem;color:#f2f3f5;font-size:1rem;line-height:1}.chatlog__markdown h1:first-child,h2:first-child,h3:first-child{margin-top:0.5rem}.chatlog__markdown ul,ol{margin:0 0 0 1rem;padding:0}.chatlog__markdown-preserve{white-space:pre-wrap}.chatlog__markdown-spoiler{background-color:rgba(255,255,255,0.1);padding:0 2px;border-radius:3px}.chatlog__markdown-spoiler--hidden{cursor:pointer;background-color:#202225;color:rgba(0,0,0,0)}.chatlog__markdown-spoiler--hidden:hover{background-color:rgba(32,34,37,0.8)}.chatlog__markdown-spoiler--hidden::selection{color:rgba(0,0,0,0)}.chatlog__markdown-quote{display:flex;margin:0.05rem 0}.chatlog__markdown-quote-border{margin-right:0.5rem;border:2px solid #4f545c;border-radius:3px}.chatlog__markdown-pre{background-color:#2f3136;font-family:"Consolas","Courier New",Courier,monospace;font-size:0.85rem;text-decoration:inherit}.chatlog__markdown-pre--multiline{display:block;margin-top:0.25rem;padding:0.5rem;border:2px solid #282b30;border-radius:5px;color:#b9bbbe}.chatlog__markdown-pre--multiline.hljs{background-color:#2f3136;color:#b9bbbe}.chatlog__markdown-pre--inline{display:inline-block;padding:2px;border-radius:3px}.chatlog__markdown-mention{border-radius:3px;padding:0 2px;background-color:rgba(88,101,242,.3);color:#dee0fc;font-weight:500}.chatlog__markdown-mention:hover{background-color:#5865f2;color:#ffffff}.chatlog__markdown-timestamp{background-color:rgba(255,255,255,0.1);padding:0 2px;border-radius:3px}.chatlog__emoji{width:1.325rem;height:1.325rem;margin:0 0.06rem;vertical-align:-0.4rem}.chatlog__emoji--small{width:1rem;height:1rem}.chatlog__emoji--large{width:2.8rem;height:2.8rem}.postamble{padding:1.25rem}.postamble__entry{color:#ffffff}</style><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js></script><script>document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.chatlog__markdown-pre--multiline').forEach(e=>hljs.highlightBlock(e));});</script><script src=https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js></script><script>document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e=>{const anim=lottie.loadAnimation({container:e,renderer:'svg',loop:true,autoplay:true,path:e.getAttribute('data-source')});anim.addEventListener('data_failed',()=>e.innerHTML='<strong>[Sticker cannot be rendered]</strong>');});});</script><script>function scrollToMessage(event,id){const element=document.getElementById('chatlog__message-container-'+id);if(!element)
+return;event.preventDefault();element.classList.add('chatlog__message-container--highlighted');window.scrollTo({top:element.getBoundingClientRect().top-document.body.getBoundingClientRect().top-(window.innerHeight/2),behavior:'smooth'});window.setTimeout(()=>element.classList.remove('chatlog__message-container--highlighted'),2000);}
+function showSpoiler(event,element){if(!element)
+return;if(element.classList.contains('chatlog__attachment--hidden')){event.preventDefault();element.classList.remove('chatlog__attachment--hidden');}
+if(element.classList.contains('chatlog__markdown-spoiler--hidden')){event.preventDefault();element.classList.remove('chatlog__markdown-spoiler--hidden');}}</script><svg style=display:none xmlns=http://www.w3.org/2000/svg><defs><symbol id=attachment-icon viewBox="0 0 720 960"><path fill=#f4f5fb d=M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z /><path fill=#7789c4 d=M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z /><path fill=#f4f5fb d=M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z /><path fill=#7789c4 d=M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z /></symbol><symbol id=join-icon viewBox="0 0 18 18"><path fill=#3ba55c d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2" /></symbol><symbol id=leave-icon viewBox="0 0 18 18"><path fill=#ed4245 d="m3.8 8 3.6-3.6-1.4-1.4-6 6 6 6 1.4-1.4-3.6-3.6h14.2v-2" /></symbol><symbol id=call-icon viewBox="0 0 18 18"><path fill=#3ba55c fill-rule=evenodd d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346" /></symbol><symbol id=pencil-icon viewBox="0 0 18 18"><path fill=#99aab5 d="m0 14.25v3.75h3.75l11.06-11.06-3.75-3.75zm17.71-10.21c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75z" /></symbol><symbol id=pin-icon viewBox="0 0 18 18"><path fill=#b9bbbe d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z" /></symbol><symbol id=channel-icon viewBox="0 0 24 24"><path fill=#b9bbbe d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.711 7.28023 21.6574 7.58619L21.4824 8.58619C21.4406 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.301 15.2802 20.2474 15.5862L20.0724 16.5862C20.0306 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36325 20.5874C7.32088 20.8261 7.11337 21 6.87094 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z" /></symbol><symbol id=thread-icon viewBox="0 0 24 24"><path fill=#b9bbbe d="M5.43309 21C5.35842 21 5.30189 20.9325 5.31494 20.859L5.99991 17H2.14274C2.06819 17 2.01168 16.9327 2.02453 16.8593L2.33253 15.0993C2.34258 15.0419 2.39244 15 2.45074 15H6.34991L7.40991 9H3.55274C3.47819 9 3.42168 8.93274 3.43453 8.85931L3.74253 7.09931C3.75258 7.04189 3.80244 7 3.86074 7H7.75991L8.45234 3.09903C8.46251 3.04174 8.51231 3 8.57049 3H10.3267C10.4014 3 10.4579 3.06746 10.4449 3.14097L9.75991 7H15.7599L16.4523 3.09903C16.4625 3.04174 16.5123 3 16.5705 3H18.3267C18.4014 3 18.4579 3.06746 18.4449 3.14097L17.7599 7H21.6171C21.6916 7 21.7481 7.06725 21.7353 7.14069L21.4273 8.90069C21.4172 8.95811 21.3674 9 21.3091 9H17.4099L17.0495 11.04H15.05L15.4104 9H9.41035L8.35035 15H10.5599V17H7.99991L7.30749 20.901C7.29732 20.9583 7.24752 21 7.18934 21H5.43309Z" /><path fill=#b9bbbe d="M13.4399 12.96C12.9097 12.96 12.4799 13.3898 12.4799 13.92V20.2213C12.4799 20.7515 12.9097 21.1813 13.4399 21.1813H14.3999C14.5325 21.1813 14.6399 21.2887 14.6399 21.4213V23.4597C14.6399 23.6677 14.8865 23.7773 15.0408 23.6378L17.4858 21.4289C17.6622 21.2695 17.8916 21.1813 18.1294 21.1813H22.5599C23.0901 21.1813 23.5199 20.7515 23.5199 20.2213V13.92C23.5199 13.3898 23.0901 12.96 22.5599 12.96H13.4399Z" /></symbol></defs></svg><body><div class=preamble><div class=preamble__guild-icon-container><img class=preamble__guild-icon src="https://cdn.discordapp.com/icons/550315686636027908/8c2042235f094d6e78489c8f268e531a.png?size=512" alt="Guild icon" loading=lazy></div><div class=preamble__entries-container><div class=preamble__entry>Sea of Thieves Creators</div><div class=preamble__entry>╔═══ Rare Official ═══╗ / roadmap</div></div></div>
+<div class="chatlog">
+
+<div class=chatlog__message-group><div id=chatlog__message-container-946502096826540094 class=chatlog__message-container data-message-id=946502096826540094><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/272818271399444481/avatars/a_b828a344153b70a969d3f126ed99662c.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=j0toro data-user-id=272818271399444481>🚫Back on Wednesday🚫</span> <span class=chatlog__timestamp title="Thursday, 24 February 2022 8:21 PM"><a href=#chatlog__message-container-946502096826540094>24/02/2022 8:21 PM</a></span></div><div class=chatlog__attachment><a href="https://cdn.discordapp.com/attachments/679268419664609280/946502096704901190/unknown.png?ex=69d2c445&amp;is=69d172c5&amp;hm=7258a8d2b7f0d1d5d6a8ada127f787a8041aee1349a6b76eca1d71667042099a&amp;"> <img class=chatlog__attachment-media src="https://cdn.discordapp.com/attachments/679268419664609280/946502096704901190/unknown.png?ex=69d2c445&amp;is=69d172c5&amp;hm=7258a8d2b7f0d1d5d6a8ada127f787a8041aee1349a6b76eca1d71667042099a&amp;" alt="Image attachment" title="Image: unknown.png (1.14 MB)" loading=lazy> </a></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-946741946959925268 class=chatlog__message-container data-message-id=946741946959925268><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/avatars/361841237453438977/1150370da4352ee0fa1c178ba5b5b337.png?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=jjgaymer_ data-user-id=361841237453438977>jjgaymer☠</span> <span class=chatlog__timestamp title="Friday, 25 February 2022 12:14 PM"><a href=#chatlog__message-container-946741946959925268>25/02/2022 12:14 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><strong>SEASON 5/6 ROADMAP</strong>
+
+<strong>NARRATIVE ARC 1</strong>
+
+11th Feb - World Changes (Fog of the Damned and Golden Sands changes)
+
+17th Feb - Adventure 1 (Shrouded Islands) – 2 weeks
+
+7th March – Season 6 update Trailer
+10th March - Season 6 Launch
+•    Emergent Small Fort Experience
+•    Pirate Emporium Update
+•    Twitch Drops Twilight Hunter Weapons Set 
+(March 11th 10am – March 15th 10am)
+
+21st March - Adventure 2 Cinematic Trailer
+24th March - Adventure 2 (Forts of the Forgotten) – 2 Weeks
+
+7th April – April Build
+•    Pirate Emporium Update
+
+18th April - Adventure 3 Cinematic Trailer
+21st April - Adventure 3 Finale (???) – 3 Weeks
+•    New Pirate Legend Voyages
+•    Pirate Legend Level Cap Increase
+•    Twitch Drops Twilight Hunter Clothing Set Pt 1 
+(April 22nd 10am - April 27th 10am)</span> <span class=chatlog__edited-timestamp title="Friday, 17 June 2022 4:14 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=thumbsup><img class="chatlog__emoji chatlog__emoji--small" alt=👍 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg loading=lazy> <span class=chatlog__reaction-count>23</span></div><div class=chatlog__reaction title=hearts><img class="chatlog__emoji chatlog__emoji--small" alt=♥️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2665.svg loading=lazy> <span class=chatlog__reaction-count>8</span></div><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>5</span></div><div class=chatlog__reaction title=loveee><img class="chatlog__emoji chatlog__emoji--small" alt=loveee src=https://cdn.discordapp.com/emojis/701133277586653186.png loading=lazy> <span class=chatlog__reaction-count>1</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-987390348076675143 class=chatlog__message-container data-message-id=987390348076675143><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/avatars/361841237453438977/1150370da4352ee0fa1c178ba5b5b337.png?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=jjgaymer_ data-user-id=361841237453438977>jjgaymer☠</span> <span class=chatlog__timestamp title="Friday, 17 June 2022 4:16 PM"><a href=#chatlog__message-container-987390348076675143>17/06/2022 4:16 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><strong>NARRATIVE ARC 2</strong>
+
+12th May - May Build
+•    Pirate Emporium Update
+
+23rd May – Lost Sands Cinematic Trailer
+26th May – Lost Sands – 2 Weeks
+•    Twitch Drops Twilight Hunter Clothing Set Pt 2 (May 27th 10am – May 31st 10am)
+
+23rd June - June Build
+•    Pirate Emporium Update
+
+25th June – Forsaken Hunter Cinematic Trailer
+30th June – Forsaken Hunter – 2 Weeks
+•    Twitch Drops Twilight Hunter Ship Set Pt 1 (July 1st 10am – July 5th 10am)
+
+4th August – <strong>Season 7 Launch</strong>
+•    Ship Captaincy!
+•    Pirate Emporium Update
+•    Twitch Drops August 5th 10am – August 8th 10am – Rising Morningstar Clothing runback
+
+15th  August – A Hunters Cry Cinematic Trailer
+18th August – A Hunters Cry (FINALE) – 3 Weeks
+•    Pirate Emporium Update
+•   Twitch Drops August 18th 10am – August 22nd 10am – Twilight Hunter Ship Set Part 2
+
+<strong>NARRATIVE ARC 3</strong>
+
+12th September – Adventure 7 Cinematic Trailer
+15th September – Adventure 7 – 2 Weeks
+•    Twitch Drops 30th September 10am – 04th October 10am – Eastern Winds Sapphire Equipment Part 1
+
+10th October – Adventure 8 Cinematic Trailer
+13th October – Adventure 8 – 2 Weeks
+•    Twitch Drops 14th October 10am – 18th October 10am – Eastern Winds Sapphire Equipment Part 2</span> <span class=chatlog__edited-timestamp title="Tuesday, 6 September 2022 2:50 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=spuletLOVE><img class="chatlog__emoji chatlog__emoji--small" alt=spuletLOVE src=https://cdn.discordapp.com/emojis/672244762430144533.png loading=lazy> <span class=chatlog__reaction-count>9</span></div><div class=chatlog__reaction title=thumbsup><img class="chatlog__emoji chatlog__emoji--small" alt=👍 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg loading=lazy> <span class=chatlog__reaction-count>16</span></div><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>12</span></div><div class=chatlog__reaction title=nateacHype><img class="chatlog__emoji chatlog__emoji--small" alt=nateacHype src=https://cdn.discordapp.com/emojis/934131918021230602.png loading=lazy> <span class=chatlog__reaction-count>5</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1026530369874444308 class=chatlog__message-container data-message-id=1026530369874444308><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/177012792904122368/avatars/a_ec09e603e42b495e2ef3fd6ce258afe5.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=h1ghvoltage data-user-id=177012792904122368>H1gh Voltage</span> <span class=chatlog__timestamp title="Monday, 3 October 2022 4:25 PM"><a href=#chatlog__message-container-1026530369874444308>3/10/2022 4:25 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🔼"
+    title="arrow_up_small"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f53c.svg">  Continuing roadmap for <strong>NARRATIVE ARC 3 </strong> from above <img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🔼"
+    title="arrow_up_small"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f53c.svg"> 
+
+28th October 7pm - special Halloween stream on SoT TV - &quot;Tricksters vs Treaters&quot;
+
+31st October - Cinematic trailer for Adventure 9
+
+3rd November - <strong>Adventure 9</strong> for 2 weeks
+
+Twitch Drops 4th November 10am – 7th November 10am – Eastern Winds Sapphire Musical Instruments
+
+18th November - Season 8 Pre-launch stream on SoT TV
+
+21st November - Season 8 deep-dive video
+
+22th November - <strong>Season 8 Launch</strong>
+•    PVP on demand
+•    Faction hideouts, emissary and captaincy expansions
+•    Pirate Emporium Update
+
+Twitch Drops 10am UTC 23rd - 10am UTC 25th November - Rising Morningstar Clothing (available for anyone streaming SoT):
+
+1st hour - RMS Captain Gloves
+2nd hour - RMS Dress
+3rd hour - RMS Dress Hat
+4th hour - RMS Dress Jacket</span> <span class=chatlog__edited-timestamp title="Wednesday, 16 November 2022 4:30 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=shibaheart><img class="chatlog__emoji chatlog__emoji--small" alt=shibaheart src=https://cdn.discordapp.com/emojis/815005209611862056.png loading=lazy> <span class=chatlog__reaction-count>14</span></div><div class=chatlog__reaction title=nateacLove><img class="chatlog__emoji chatlog__emoji--small" alt=nateacLove src=https://cdn.discordapp.com/emojis/893650282356019251.png loading=lazy> <span class=chatlog__reaction-count>10</span></div><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>19</span></div><div class=chatlog__reaction title=blobDance><img class="chatlog__emoji chatlog__emoji--small" alt=blobDance src=https://cdn.discordapp.com/emojis/792518736267575356.gif loading=lazy> <span class=chatlog__reaction-count>10</span></div><div class=chatlog__reaction title=regional_indicator_p><img class="chatlog__emoji chatlog__emoji--small" alt=🇵 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f1f5.svg loading=lazy> <span class=chatlog__reaction-count>10</span></div><div class=chatlog__reaction title=regional_indicator_v><img class="chatlog__emoji chatlog__emoji--small" alt=🇻 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f1fb.svg loading=lazy> <span class=chatlog__reaction-count>10</span></div><div class=chatlog__reaction title=parking><img class="chatlog__emoji chatlog__emoji--small" alt=🅿️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f17f.svg loading=lazy> <span class=chatlog__reaction-count>10</span></div><div class=chatlog__reaction title=anPartyParrotHYPE><img class="chatlog__emoji chatlog__emoji--small" alt=anPartyParrotHYPE src=https://cdn.discordapp.com/emojis/912512505090297936.gif loading=lazy> <span class=chatlog__reaction-count>8</span></div><div class=chatlog__reaction title=coeurpirate><img class="chatlog__emoji chatlog__emoji--small" alt=coeurpirate src=https://cdn.discordapp.com/emojis/762817719825072158.png loading=lazy> <span class=chatlog__reaction-count>6</span></div><div class=chatlog__reaction title=vheart><img class="chatlog__emoji chatlog__emoji--small" alt=vheart src=https://cdn.discordapp.com/emojis/366410126099218435.png loading=lazy> <span class=chatlog__reaction-count>6</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1039182375990599690 class=chatlog__message-container data-message-id=1039182375990599690><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/177012792904122368/avatars/a_ec09e603e42b495e2ef3fd6ce258afe5.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=h1ghvoltage data-user-id=177012792904122368>H1gh Voltage</span> <span class=chatlog__timestamp title="Monday, 7 November 2022 2:19 PM"><a href=#chatlog__message-container-1039182375990599690>7/11/2022 2:19 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><strong>NARRATIVE ARC 4</strong>
+
+24th November 10:00 UTC - 29th November 10:00 UTC - Black Friday Emporium sale
+
+2nd - 5th December - <strong>Twitch Drops</strong> Eastern Winds Sapphire Equipment part 2: Bucket, Lantern, Shovel, Trumpet
+
+8th-22nd December - <strong>Adventure 10</strong> &quot;The Rogue’s Legacy&quot;
+
+19th December 2022 - 2nd January 2023 - <strong>Festival of Giving</strong>:
+•    Lights Switch stream on 16th December
+•    Festival of Giving events - Gifts and Glory, Grogmanay
+•    Emporium Sale
+•    Twitch Drops for Everyone - Frozen Horizon Clothing Set
+
+13th - 16th January 2023 - <strong>Twitch Drops</strong> Eastern Winds Sapphire Ship part 1: Flag, Hull, Sails, Wheel
+
+19th January - 2nd February - <strong>Adventure 11</strong> &quot;The Secret Wilds&quot;
+
+27th - 30th January 2023 - <strong>Twitch Drops</strong> Eastern Winds Sapphire Ship part 2: Figurehead, Cannons, Capstan, Tankard
+
+11 February 2023 - <strong>Community Day</strong>
+•    11-12 February Twitch Drops for Everyone
+
+20th-27th February - Double Rewards Week:
+Double rep and gold for Trading companies across the week ending with Gold and Glory weekend
+
+24th - 27th February 2023 - <strong>Twitch Drops</strong> Eastern Winds Sapphire Clothing part 1: Belt, Dress, Gloves, Hat
+
+6th March - <strong>Season 9 </strong>reveal livestream
+
+16th March - <strong>Season 9</strong> Launch
+•    16-20 March Twitch Drops for Everyone
+
+20th March - <strong>Anniversary</strong></span> <span class=chatlog__edited-timestamp title="Friday, 3 March 2023 5:18 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=eyes><img class="chatlog__emoji chatlog__emoji--small" alt=👀 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg loading=lazy> <span class=chatlog__reaction-count>26</span></div><div class=chatlog__reaction title=wolfy_heart><img class="chatlog__emoji chatlog__emoji--small" alt=wolfy_heart src=https://cdn.discordapp.com/emojis/844619083374657616.png loading=lazy> <span class=chatlog__reaction-count>9</span></div><div class=chatlog__reaction title=gift><img class="chatlog__emoji chatlog__emoji--small" alt=🎁 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f381.svg loading=lazy> <span class=chatlog__reaction-count>12</span></div><div class=chatlog__reaction title=thumbsup><img class="chatlog__emoji chatlog__emoji--small" alt=👍 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg loading=lazy> <span class=chatlog__reaction-count>12</span></div><div class=chatlog__reaction title=hearts><img class="chatlog__emoji chatlog__emoji--small" alt=♥️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2665.svg loading=lazy> <span class=chatlog__reaction-count>16</span></div><div class=chatlog__reaction title=nateacLove><img class="chatlog__emoji chatlog__emoji--small" alt=nateacLove src=https://cdn.discordapp.com/emojis/893650282356019251.png loading=lazy> <span class=chatlog__reaction-count>6</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1083865858981511309 class=chatlog__message-container data-message-id=1083865858981511309><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/177012792904122368/avatars/a_ec09e603e42b495e2ef3fd6ce258afe5.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=h1ghvoltage data-user-id=177012792904122368>H1gh Voltage</span> <span class=chatlog__timestamp title="Friday, 10 March 2023 9:35 PM"><a href=#chatlog__message-container-1083865858981511309>10/03/2023 9:35 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve>31st March 6pm UTC - SoT TV: Anniversary Celebration Tournament
+
+7th - 10th April - <strong>Twitch Drops</strong> Eastern Winds Sapphire Clothing part 2: Hook, Jacket, Pegleg, Shirt
+
+26th - 27th April - SoT TV: One Big Game - SpecialEffect Football Match
+
+11th May - Start of Mystery 2
+
+26th-29th May - <strong>Twitch Drops</strong> Eastern Winds Ruby Equipment part 1: compass, fishing rod, pocket watch, spyglass</span> <span class=chatlog__edited-timestamp title="Monday, 22 May 2023 11:36 AM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=eyes><img class="chatlog__emoji chatlog__emoji--small" alt=👀 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg loading=lazy> <span class=chatlog__reaction-count>21</span></div><div class=chatlog__reaction title=thumbsup><img class="chatlog__emoji chatlog__emoji--small" alt=👍 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg loading=lazy> <span class=chatlog__reaction-count>9</span></div><div class=chatlog__reaction title=PagChomp><img class="chatlog__emoji chatlog__emoji--small" alt=PagChomp src=https://cdn.discordapp.com/emojis/741368237400391699.gif loading=lazy> <span class=chatlog__reaction-count>11</span></div><div class=chatlog__reaction title=mag><img class="chatlog__emoji chatlog__emoji--small" alt=🔍 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f50d.svg loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=question><img class="chatlog__emoji chatlog__emoji--small" alt=❓ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2753.svg loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=nateacLove><img class="chatlog__emoji chatlog__emoji--small" alt=nateacLove src=https://cdn.discordapp.com/emojis/893650282356019251.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=snoocare><img class="chatlog__emoji chatlog__emoji--small" alt=snoocare src=https://cdn.discordapp.com/emojis/898369935724654672.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=partying_face><img class="chatlog__emoji chatlog__emoji--small" alt=🥳 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f973.svg loading=lazy> <span class=chatlog__reaction-count>1</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1110171892544966729 class=chatlog__message-container data-message-id=1110171892544966729><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/177012792904122368/avatars/a_ec09e603e42b495e2ef3fd6ce258afe5.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=h1ghvoltage data-user-id=177012792904122368>H1gh Voltage</span> <span class=chatlog__timestamp title="Monday, 22 May 2023 11:46 AM"><a href=#chatlog__message-container-1110171892544966729>22/05/2023 11:46 AM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><strong>Summer 2023 Roadmap:</strong>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="sloop"
+    title="sloop"
+    src="https://cdn.discordapp.com/emojis/631716324430708756.png"> 15th-22nd June - Captains Week
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="RamseyLUL"
+    title="RamseyLUL"
+    src="https://cdn.discordapp.com/emojis/746908780037668964.png"> 22nd June - 6th July - <strong>Adventure 12</strong> &quot;A Dark Deception&quot;
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 23rd-26th June - <strong>Twitch Drops</strong> EWS Boots, Hair, Trousers and Shooting story emote
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🐵"
+    title="monkey_face"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f435.svg"> 20th July - <strong>The Legend of Monkey Island</strong>  part 1
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 28th-31st July - <strong>Twitch Drops</strong> EWR Items
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="coinGold"
+    title="coinGold"
+    src="https://cdn.discordapp.com/emojis/956013613242531850.png">  4th-7th August - Gold and Glory Weekend
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 18th-21st August - Summer <strong>Drops for Everyone</strong>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🐵"
+    title="monkey_face"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f435.svg"> 31st August - <strong>The Legend of Monkey Island</strong> part 2</span> <span class=chatlog__edited-timestamp title="Friday, 4 August 2023 12:03 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=eyes><img class="chatlog__emoji chatlog__emoji--small" alt=👀 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg loading=lazy> <span class=chatlog__reaction-count>22</span></div><div class=chatlog__reaction title=nateacLove><img class="chatlog__emoji chatlog__emoji--small" alt=nateacLove src=https://cdn.discordapp.com/emojis/893650282356019251.png loading=lazy> <span class=chatlog__reaction-count>6</span></div><div class=chatlog__reaction title=kharSIP><img class="chatlog__emoji chatlog__emoji--small" alt=kharSIP src=https://cdn.discordapp.com/emojis/826577655402201110.png loading=lazy> <span class=chatlog__reaction-count>3</span></div><div class=chatlog__reaction title=SaikaPeepoClap><img class="chatlog__emoji chatlog__emoji--small" alt=SaikaPeepoClap src=https://cdn.discordapp.com/emojis/926294368455897138.gif loading=lazy> <span class=chatlog__reaction-count>3</span></div><div class=chatlog__reaction title=HappyHeart><img class="chatlog__emoji chatlog__emoji--small" alt=HappyHeart src=https://cdn.discordapp.com/emojis/633508542774771723.png loading=lazy> <span class=chatlog__reaction-count>3</span></div><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>5</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1136992654048120882 class=chatlog__message-container data-message-id=1136992654048120882><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/177012792904122368/avatars/a_ec09e603e42b495e2ef3fd6ce258afe5.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=h1ghvoltage data-user-id=177012792904122368>H1gh Voltage</span> <span class=chatlog__timestamp title="Friday, 4 August 2023 12:02 PM"><a href=#chatlog__message-container-1136992654048120882>4/08/2023 12:02 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><strong>Autumn/Winter 2023 Roadmap:</strong>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="09Legendario"
+    title="09Legendario"
+    src="https://cdn.discordapp.com/emojis/971830081603387403.png"> 7th-14th September - Legend&#39;s Week
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 15th - 18th September - <strong>Twitch Drops</strong> EWR Items
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🐵"
+    title="monkey_face"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f435.svg"> 28th September - <strong>The Legend of Monkey Island </strong>part 3
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="ToplulukGunu"
+    title="ToplulukGunu"
+    src="https://cdn.discordapp.com/emojis/1018894998063829074.png"> 30th September-2nd October - Community Weekend
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="RatJamSoT"
+    title="RatJamSoT"
+    src="https://cdn.discordapp.com/emojis/991397901769134160.gif"> 19th October - <strong>Season 10 Launch</strong>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 20th-23rd October - S10 Launch <strong>Drops for Everyone</strong>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🎃"
+    title="jack_o_lantern"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f383.svg">  27th October 00:00 UTC -1st November 23:59 UTC - Halloween Ghoul and Glory Event
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 17th - 20th November - <strong>Twitch Drops</strong> NEW Sea Dog Recolour Items
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="ToplulukGunu"
+    title="ToplulukGunu"
+    src="https://cdn.discordapp.com/emojis/1018894998063829074.png"> 2nd - 4th December - S10 Community Weekend
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 8th - 16th December  - <strong>Drops for Everyone</strong> Frozen Horizon set part 1 (Twitch Winter Drop Fest)
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🎄"
+    title="christmas_tree"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f384.svg"> 18th-24th December - Gifts and Glory event
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 29nd December - 5th January - <strong>Drops for Everyone</strong> Frozen Horizon set part 2
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="GrogSkelly"
+    title="GrogSkelly"
+    src="https://cdn.discordapp.com/emojis/1113906559903334540.png"> 30th December - 2nd January (10 UTC) - Grogmanay 2023</span> <span class=chatlog__edited-timestamp title="Tuesday, 12 December 2023 4:36 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=green_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💚 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49a.svg loading=lazy> <span class=chatlog__reaction-count>13</span></div><div class=chatlog__reaction title=ML_Heart><img class="chatlog__emoji chatlog__emoji--small" alt=ML_Heart src=https://cdn.discordapp.com/emojis/933233239609471016.png loading=lazy> <span class=chatlog__reaction-count>5</span></div><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>9</span></div><div class=chatlog__reaction title=nateacLove><img class="chatlog__emoji chatlog__emoji--small" alt=nateacLove src=https://cdn.discordapp.com/emojis/893650282356019251.png loading=lazy> <span class=chatlog__reaction-count>5</span></div><div class=chatlog__reaction title=KPLove><img class="chatlog__emoji chatlog__emoji--small" alt=KPLove src=https://cdn.discordapp.com/emojis/770109058983919666.png loading=lazy> <span class=chatlog__reaction-count>2</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1178702291663073301 class=chatlog__message-container data-message-id=1178702291663073301><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/177012792904122368/avatars/a_ec09e603e42b495e2ef3fd6ce258afe5.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=h1ghvoltage data-user-id=177012792904122368>H1gh Voltage</span> <span class=chatlog__timestamp title="Monday, 27 November 2023 2:22 PM"><a href=#chatlog__message-container-1178702291663073301>27/11/2023 2:22 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><strong>Beginning of 2024 Roadmap:</strong>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="RatJamSoT"
+    title="RatJamSoT"
+    src="https://cdn.discordapp.com/emojis/991397901769134160.gif"> 23th January - Season 11 Launch
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 24th-28nd January - S11 Launch Drops for Everyone
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 9th-12th February - Twitch Drops Sea Dog Recolour Items
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="ToplulukGunu"
+    title="ToplulukGunu"
+    src="https://cdn.discordapp.com/emojis/1018894998063829074.png"> 24th-26th February - Community Weekend
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 15th-18th March - Twitch Drops EWR Ship part 1
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="messageinabottle"
+    title="messageinabottle"
+    src="https://cdn.discordapp.com/emojis/712713292409339995.png"> 20-25th March - Anniversary Message in a Bottle event
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 5th-8th April - Twitch Drops Rascal Sea Dog Items
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="goldcoin"
+    title="goldcoin"
+    src="https://cdn.discordapp.com/emojis/709727355459076227.png">19th-22nd April - Gold and Glory Weekend
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/712713289284583545.png"> 30th April-7th May - S12 Launch Drops for Everyone
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="RatJamSoT"
+    title="RatJamSoT"
+    src="https://cdn.discordapp.com/emojis/991397901769134160.gif"> 30th April - Season 12 and PS5 Launch
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Voyage"
+    title="Voyage"
+    src="https://cdn.discordapp.com/emojis/694998660882104382.png"> 16th-23rd May - Gilded Voyages</span> <span class=chatlog__edited-timestamp title="Tuesday, 23 April 2024 12:58 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>27</span></div><div class=chatlog__reaction title=ML_Heart><img class="chatlog__emoji chatlog__emoji--small" alt=ML_Heart src=https://cdn.discordapp.com/emojis/933233239609471016.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=HimboPOG><img class="chatlog__emoji chatlog__emoji--small" alt=HimboPOG src=https://cdn.discordapp.com/emojis/1135005371111583765.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=green_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💚 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49a.svg loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=falcpog><img class="chatlog__emoji chatlog__emoji--small" alt=falcpog src=https://cdn.discordapp.com/emojis/801063929383616512.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=toxiesLook><img class="chatlog__emoji chatlog__emoji--small" alt=toxiesLook src=https://cdn.discordapp.com/emojis/1075463771197288569.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=nateacLove><img class="chatlog__emoji chatlog__emoji--small" alt=nateacLove src=https://cdn.discordapp.com/emojis/893650282356019251.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=krakenxHeart><img class="chatlog__emoji chatlog__emoji--small" alt=krakenxHeart src=https://cdn.discordapp.com/emojis/814619159857725451.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=thumbsup><img class="chatlog__emoji chatlog__emoji--small" alt=👍 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg loading=lazy> <span class=chatlog__reaction-count>1</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1243135650937573437 class=chatlog__message-container data-message-id=1243135650937573437><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/avatars/583643370010705930/ef388f65913259c02251f191fc9dcadd.png?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author title=caliburngg data-user-id=583643370010705930>Caliburn</span> <span class=chatlog__timestamp title="Thursday, 23 May 2024 9:37 AM"><a href=#chatlog__message-container-1243135650937573437>23/05/2024 9:37 AM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><strong>More 2024 things:</strong>
+
+<s><img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="💎"
+    title="gem"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f48e.svg"> 24th May - 27th May - Partner Drops (Eastern Winds Ruby)
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🎰"
+    title="slot_machine"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f3b0.svg"> 10th - 17th June - Emporium Celebration (buy anything and you get entered into a raffle to win EVERYTHING)
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🎊"
+    title="confetti_ball"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f38a.svg"> 15th - 17th June - Community Weekend + Everyone Drops
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🛠"
+    title="🛠"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f6e0.svg">️ 20th June - June Update
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="💜"
+    title="purple_heart"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49c.svg"> 28th - 30th June - TwitchCon Europe</s>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="💎"
+    title="gem"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f48e.svg"> 5th - 8th July - Partner Drops (Rascal Sea Dog)
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🏴"
+    title="flag_black"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f3f4.svg">‍<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="☠"
+    title="☠"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2620.svg">️ 12 - 13th July - Sea of Thieves Fest
+
+❤️‍<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🔥"
+    title="fire"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f525.svg"> 25th July - 1st August* - Season 13 Launch: Drops for Everyone
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🌞"
+    title="sun_with_face"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f31e.svg"> 21st - 28th August: Partner Drops - Twitch Summer of Rewards (Eastern Winds Sapphire)
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="📣"
+    title="mega"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f4e3.svg"> 21st - 23rd September - Talk Like A Pirate Day + Community Weekend: Drops for Everyone
+
+<s><img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🪷"
+    title="🪷"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1fab7.svg"> 11th - 14th October* - Season 13: Partner Drops (Eastern Winds Ruby)</s>
+
+*Removed in favour of S14 launch drops, these&#39;ll still happen just as the first partner drop of S14 instead.</span> <span class=chatlog__edited-timestamp title="Monday, 16 September 2024 11:19 AM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=thumbsup><img class="chatlog__emoji chatlog__emoji--small" alt=👍 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg loading=lazy> <span class=chatlog__reaction-count>23</span></div><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>22</span></div><div class=chatlog__reaction title=partying_face><img class="chatlog__emoji chatlog__emoji--small" alt=🥳 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f973.svg loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=CChype><img class="chatlog__emoji chatlog__emoji--small" alt=CChype src=https://cdn.discordapp.com/emojis/1200977397684650134.png loading=lazy> <span class=chatlog__reaction-count>2</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1283053029876301856 class=chatlog__message-container data-message-id=1283053029876301856><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/272818271399444481/avatars/a_b828a344153b70a969d3f126ed99662c.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=j0toro data-user-id=272818271399444481>🚫Back on Wednesday🚫</span> <span class=chatlog__timestamp title="Tuesday, 10 September 2024 1:14 PM"><a href=#chatlog__message-container-1283053029876301856>10/09/2024 1:14 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><span class="chatlog__markdown-mention" style="color: rgb(3, 109, 14); background-color: rgba(3, 109, 14, 0.1);">@Partners</span> <span class="chatlog__markdown-mention" style="color: rgb(179, 218, 221); background-color: rgba(179, 218, 221, 0.1);">@Partner Legends</span> <span class="chatlog__markdown-mention" style="color: rgb(245, 127, 196); background-color: rgba(245, 127, 196, 0.1);">@Affiliate</span> 
+
+<h2>DO NOT SHARE</h2>
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="CommunityDayS12"
+    title="CommunityDayS12"
+    src="https://cdn.discordapp.com/emojis/1247261371494568068.png">  02nd November  - 04th November : Halloween themed Community Weekend
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="legend"
+    title="legend"
+    src="https://cdn.discordapp.com/emojis/631716191898959872.png">  25th November  - 02nd December : Legends Week
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="present"
+    title="present"
+    src="https://cdn.discordapp.com/emojis/707344606181720134.png"> 19th December  - 26th December : Festival of Giving
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="grog"
+    title="grog"
+    src="https://cdn.discordapp.com/emojis/961048495765200989.png">  27th December  - 03rd January: Grogmanay
+
+------
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="EmissaryGuild"
+    title="EmissaryGuild"
+    src="https://cdn.discordapp.com/emojis/1164127899297787924.png"> Guilds Boost (TBC - NO DATE YET)</span> <span class=chatlog__edited-timestamp title="Monday, 21 October 2024 7:45 AM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=Party><img class="chatlog__emoji chatlog__emoji--small" alt=Party src=https://cdn.discordapp.com/emojis/824659113397059595.gif loading=lazy> <span class=chatlog__reaction-count>17</span></div><div class=chatlog__reaction title=green_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💚 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49a.svg loading=lazy> <span class=chatlog__reaction-count>3</span></div><div class=chatlog__reaction title=zerstgRupuchCora><img class="chatlog__emoji chatlog__emoji--small" alt=zerstgRupuchCora src=https://cdn.discordapp.com/emojis/1075099509136310433.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>9</span></div><div class=chatlog__reaction title=hot_pepper><img class="chatlog__emoji chatlog__emoji--small" alt=🌶️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f336.svg loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=monkyjvMerci><img class="chatlog__emoji chatlog__emoji--small" alt=monkyjvMerci src=https://cdn.discordapp.com/emojis/1258021009869770762.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=ML_Heart><img class="chatlog__emoji chatlog__emoji--small" alt=ML_Heart src=https://cdn.discordapp.com/emojis/933233239609471016.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=nateacLove><img class="chatlog__emoji chatlog__emoji--small" alt=nateacLove src=https://cdn.discordapp.com/emojis/893650282356019251.png loading=lazy> <span class=chatlog__reaction-count>1</span></div></div></div></div></div><div id=chatlog__message-container-1283053066500964442 class=chatlog__message-container data-message-id=1283053066500964442><div class=chatlog__message><div class=chatlog__message-aside><div class=chatlog__short-timestamp title="Tuesday, 10 September 2024 1:14 PM">1:14 PM</div></div><div class=chatlog__message-primary><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve>*subject to change
+
+## DO NOT SHARE</span></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1298265437624074352 class=chatlog__message-container data-message-id=1298265437624074352><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/272818271399444481/avatars/a_b828a344153b70a969d3f126ed99662c.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=j0toro data-user-id=272818271399444481>🚫Back on Wednesday🚫</span> <span class=chatlog__timestamp title="Tuesday, 22 October 2024 12:43 PM"><a href=#chatlog__message-container-1298265437624074352>22/10/2024 12:43 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><span class="chatlog__markdown-mention" style="color: rgb(3, 109, 14); background-color: rgba(3, 109, 14, 0.1);">@Partners</span> <span class="chatlog__markdown-mention" style="color: rgb(179, 218, 221); background-color: rgba(179, 218, 221, 0.1);">@Partner Legends</span> <span class="chatlog__markdown-mention" style="color: rgb(245, 127, 196); background-color: rgba(245, 127, 196, 0.1);">@Affiliate</span> 
+
+<h2>DO NOT SHARE</h2>
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png">  15th November - 18th November : Partner Drops 
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="ReleaseNotesIcon"
+    title="ReleaseNotesIcon"
+    src="https://cdn.discordapp.com/emojis/1199191576992305252.png"> November Update - TBC but likely 18th
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="chest"
+    title="chest"
+    src="https://cdn.discordapp.com/emojis/631716083505823756.png">  Voyage of Pirate Luck - to go live with the update 
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="compass"
+    title="compass"
+    src="https://cdn.discordapp.com/emojis/1100698734855196693.png"> Compass of Chaos (web based)  - to go live with the update 
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="CommunityDayS12"
+    title="CommunityDayS12"
+    src="https://cdn.discordapp.com/emojis/1247261371494568068.png">  23rd November  - 25th November : Community Weekend
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="legend"
+    title="legend"
+    src="https://cdn.discordapp.com/emojis/631716191898959872.png">  02nd December - 09th December : Legends Week
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="present"
+    title="present"
+    src="https://cdn.discordapp.com/emojis/707344606181720134.png"> 19th December  - 26th December : Festival of Giving
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="grog"
+    title="grog"
+    src="https://cdn.discordapp.com/emojis/961048495765200989.png">  27th December  - 03rd January: Grogmanay
+
+*Subject to change
+
+## DO NOT SHARE</span> <span class=chatlog__edited-timestamp title="Thursday, 14 November 2024 4:53 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=thumbsup><img class="chatlog__emoji chatlog__emoji--small" alt=👍 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg loading=lazy> <span class=chatlog__reaction-count>14</span></div><div class=chatlog__reaction title=loveee><img class="chatlog__emoji chatlog__emoji--small" alt=loveee src=https://cdn.discordapp.com/emojis/701133277586653186.png loading=lazy> <span class=chatlog__reaction-count>5</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1306617127947599953 class=chatlog__message-container data-message-id=1306617127947599953><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/272818271399444481/avatars/a_b828a344153b70a969d3f126ed99662c.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=j0toro data-user-id=272818271399444481>🚫Back on Wednesday🚫</span> <span class=chatlog__timestamp title="Thursday, 14 November 2024 1:49 PM"><a href=#chatlog__message-container-1306617127947599953>14/11/2024 1:49 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><span class="chatlog__markdown-mention" style="color: rgb(3, 109, 14); background-color: rgba(3, 109, 14, 0.1);">@Partners</span> <span class="chatlog__markdown-mention" style="color: rgb(179, 218, 221); background-color: rgba(179, 218, 221, 0.1);">@Partner Legends</span>  <span class="chatlog__markdown-mention" style="color: rgb(245, 127, 196); background-color: rgba(245, 127, 196, 0.1);">@Affiliate</span> 
+
+Tweaked the above based on conversations today</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=hearts><img class="chatlog__emoji chatlog__emoji--small" alt=♥️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2665.svg loading=lazy> <span class=chatlog__reaction-count>9</span></div><div class=chatlog__reaction title=green_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💚 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49a.svg loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=loveee><img class="chatlog__emoji chatlog__emoji--small" alt=loveee src=https://cdn.discordapp.com/emojis/701133277586653186.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=ThankYou><img class="chatlog__emoji chatlog__emoji--small" alt=ThankYou src=https://cdn.discordapp.com/emojis/1126824752439365682.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=Thankyou><img class="chatlog__emoji chatlog__emoji--small" alt=Thankyou src=https://cdn.discordapp.com/emojis/1065997389007163402.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=thankyou><img class="chatlog__emoji chatlog__emoji--small" alt=thankyou src=https://cdn.discordapp.com/emojis/782464572077637682.gif loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=pray><img class="chatlog__emoji chatlog__emoji--small" alt=🙏 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f64f.svg loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=purple_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💜 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49c.svg loading=lazy> <span class=chatlog__reaction-count>1</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1326912831093997588 class=chatlog__message-container data-message-id=1326912831093997588><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/avatars/583643370010705930/ef388f65913259c02251f191fc9dcadd.png?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author title=caliburngg data-user-id=583643370010705930>Caliburn</span> <span class=chatlog__timestamp title="Thursday, 9 January 2025 1:57 PM"><a href=#chatlog__message-container-1326912831093997588>9/01/2025 1:57 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><span class="chatlog__markdown-mention" style="color: rgb(3, 109, 14); background-color: rgba(3, 109, 14, 0.1);">@Partners</span> <span class="chatlog__markdown-mention" style="color: rgb(179, 218, 221); background-color: rgba(179, 218, 221, 0.1);">@Partner Legends</span> <span class="chatlog__markdown-mention" style="color: rgb(245, 127, 196); background-color: rgba(245, 127, 196, 0.1);">@Affiliate</span> 
+
+Few important dates to share atm, you can find them on your SharePoints.
+
+More soontm <img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="🙂"
+    title="slight_smile"
+    src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f642.svg"></span></div><div class=chatlog__reactions><div class=chatlog__reaction title=NessieTwerk><img class="chatlog__emoji chatlog__emoji--small" alt=NessieTwerk src=https://cdn.discordapp.com/emojis/1126639780915064932.gif loading=lazy> <span class=chatlog__reaction-count>13</span></div><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>9</span></div><div class=chatlog__reaction title=saltyspeed><img class="chatlog__emoji chatlog__emoji--small" alt=saltyspeed src=https://cdn.discordapp.com/emojis/1108815870697947226.gif loading=lazy> <span class=chatlog__reaction-count>3</span></div><div class=chatlog__reaction title=krakenxHeart><img class="chatlog__emoji chatlog__emoji--small" alt=krakenxHeart src=https://cdn.discordapp.com/emojis/814619159857725451.png loading=lazy> <span class=chatlog__reaction-count>3</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1341467416173084777 class=chatlog__message-container data-message-id=1341467416173084777><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/177012792904122368/avatars/a_ec09e603e42b495e2ef3fd6ce258afe5.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=h1ghvoltage data-user-id=177012792904122368>H1gh Voltage</span> <span class=chatlog__timestamp title="Tuesday, 18 February 2025 5:52 PM"><a href=#chatlog__message-container-1341467416173084777>18/02/2025 5:52 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><span class="chatlog__markdown-mention" style="color: rgb(3, 109, 14); background-color: rgba(3, 109, 14, 0.1);">@Partners</span> <span class="chatlog__markdown-mention" style="color: rgb(179, 218, 221); background-color: rgba(179, 218, 221, 0.1);">@Partner Legends</span> <span class="chatlog__markdown-mention" style="color: rgb(245, 127, 196); background-color: rgba(245, 127, 196, 0.1);">@Affiliate</span> <span class="chatlog__markdown-mention" style="color: rgb(54, 152, 120); background-color: rgba(54, 152, 120, 0.1);">@Creator Team</span> 
+
+FEB-APR 2025 ROADMAP
+DO NOT SHARE:
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="YouTube"
+    title="YouTube"
+    src="https://cdn.discordapp.com/emojis/1059258896004436029.png"> Feb 18th - Developer Update (features some S15 info) 
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="MegChomp"
+    title="MegChomp"
+    src="https://cdn.discordapp.com/emojis/890215499806433332.gif">  Feb 20th - <strong>S15 Launch!</strong>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> Feb 20th - Feb 24th - Everyone Drops 
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="gameblast"
+    title="gameblast"
+    src="https://cdn.discordapp.com/emojis/1334241953612562442.png"> Feb 21st - 23rd- GameBlast
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="SoT_SeaOfThieves"
+    title="SoT_SeaOfThieves"
+    src="https://cdn.discordapp.com/emojis/1002251559889022976.png"> Mar 14th - 24th - Anniversary Event
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="CommunityWeekend"
+    title="CommunityWeekend"
+    src="https://cdn.discordapp.com/emojis/1309147617439252571.png"> Mar 22nd - 24th - Community Weekend
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="MegChomp"
+    title="MegChomp"
+    src="https://cdn.discordapp.com/emojis/890215499806433332.gif"> March 24th - S15 Content Update 02</span> <span class=chatlog__edited-timestamp title="Thursday, 10 April 2025 11:32 AM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>27</span></div><div class=chatlog__reaction title=gameblast><img class="chatlog__emoji chatlog__emoji--small" alt=gameblast src=https://cdn.discordapp.com/emojis/1334241953612562442.png loading=lazy> <span class=chatlog__reaction-count>6</span></div><div class=chatlog__reaction title=014Aprobado><img class="chatlog__emoji chatlog__emoji--small" alt=014Aprobado src=https://cdn.discordapp.com/emojis/853848344841551872.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=xbooseBalaborracha><img class="chatlog__emoji chatlog__emoji--small" alt=xbooseBalaborracha src=https://cdn.discordapp.com/emojis/1171736774276567100.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=purple_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💜 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49c.svg loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=Wuh><img class="chatlog__emoji chatlog__emoji--small" alt=Wuh src=https://cdn.discordapp.com/emojis/662021313535410178.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=anPartyParrotHYPE><img class="chatlog__emoji chatlog__emoji--small" alt=anPartyParrotHYPE src=https://cdn.discordapp.com/emojis/912512505090297936.gif loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=blue_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💙 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f499.svg loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=krakenxHeart><img class="chatlog__emoji chatlog__emoji--small" alt=krakenxHeart src=https://cdn.discordapp.com/emojis/814619159857725451.png loading=lazy> <span class=chatlog__reaction-count>2</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1358752441453248693 class=chatlog__message-container data-message-id=1358752441453248693><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/272818271399444481/avatars/a_b828a344153b70a969d3f126ed99662c.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=j0toro data-user-id=272818271399444481>🚫Back on Wednesday🚫</span> <span class=chatlog__timestamp title="Monday, 7 April 2025 10:37 AM"><a href=#chatlog__message-container-1358752441453248693>7/04/2025 10:37 AM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><h2>April Roadmap</h2>
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="sail_Sailor"
+    title="sail_Sailor"
+    src="https://cdn.discordapp.com/emojis/1025279564626284595.png"> April 8th - 15th: SoM sails
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="podcasteditor"
+    title="podcasteditor"
+    src="https://cdn.discordapp.com/emojis/1169312157377241238.png"> April 10th: SoT Podcast (focuses on S15) 
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Coin_Ancient"
+    title="Coin_Ancient"
+    src="https://cdn.discordapp.com/emojis/631606603207933972.png"> April 16th - 22nd: Emporium Sale
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="KegFuriosa"
+    title="KegFuriosa"
+    src="https://cdn.discordapp.com/emojis/1256952392877084753.png">  Apr 17th - 24th: Mega Stashes Event
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="youtube"
+    title="youtube"
+    src="https://cdn.discordapp.com/emojis/632984659852001282.png"> April 22nd: Dev Update
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="youtube"
+    title="youtube"
+    src="https://cdn.discordapp.com/emojis/632984659852001282.png"> April 24th:  S15 Monthly Update Promo
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="CH_IconSpotify"
+    title="CH_IconSpotify"
+    src="https://cdn.discordapp.com/emojis/733988015898099734.png"> April 24th: &quot;The Great Meg Chase&quot; on Spotify
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="twitch"
+    title="twitch"
+    src="https://cdn.discordapp.com/emojis/888911375781466173.png">  April 25th - 28th: Partner Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="FishingRod"
+    title="FishingRod"
+    src="https://cdn.discordapp.com/emojis/1338889104175267870.png"> May 02nd - 12th: Festival of Fishing
+
+<span class="chatlog__markdown-mention" style="color: rgb(179, 218, 221); background-color: rgba(179, 218, 221, 0.1);">@Partner Legends</span>  <span class="chatlog__markdown-mention" style="color: rgb(3, 109, 14); background-color: rgba(3, 109, 14, 0.1);">@Partners</span>  <span class="chatlog__markdown-mention" style="color: rgb(245, 127, 196); background-color: rgba(245, 127, 196, 0.1);">@Affiliate</span> 
+
+*Subject to change, we will edit as we get new info so keep an eye on this channel pls. *</span> <span class=chatlog__edited-timestamp title="Monday, 7 April 2025 11:50 AM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=anPartyParrotHYPE><img class="chatlog__emoji chatlog__emoji--small" alt=anPartyParrotHYPE src=https://cdn.discordapp.com/emojis/912512505090297936.gif loading=lazy> <span class=chatlog__reaction-count>13</span></div><div class=chatlog__reaction title=xbooseBalaborracha><img class="chatlog__emoji chatlog__emoji--small" alt=xbooseBalaborracha src=https://cdn.discordapp.com/emojis/1171736774276567100.png loading=lazy> <span class=chatlog__reaction-count>5</span></div><div class=chatlog__reaction title=green_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💚 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49a.svg loading=lazy> <span class=chatlog__reaction-count>5</span></div><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>8</span></div><div class=chatlog__reaction title=purple_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💜 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49c.svg loading=lazy> <span class=chatlog__reaction-count>4</span></div><div class=chatlog__reaction title=loveee><img class="chatlog__emoji chatlog__emoji--small" alt=loveee src=https://cdn.discordapp.com/emojis/701133277586653186.png loading=lazy> <span class=chatlog__reaction-count>3</span></div><div class=chatlog__reaction title=ML_Heart><img class="chatlog__emoji chatlog__emoji--small" alt=ML_Heart src=https://cdn.discordapp.com/emojis/933233239609471016.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=joe><img class="chatlog__emoji chatlog__emoji--small" alt=joe src=https://cdn.discordapp.com/emojis/1150112646977310760.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=thumbsup><img class="chatlog__emoji chatlog__emoji--small" alt=👍 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=blue_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💙 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f499.svg loading=lazy> <span class=chatlog__reaction-count>2</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1366740844140429364 class=chatlog__message-container data-message-id=1366740844140429364><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/177012792904122368/avatars/a_ec09e603e42b495e2ef3fd6ce258afe5.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=h1ghvoltage data-user-id=177012792904122368>H1gh Voltage</span> <span class=chatlog__timestamp title="Tuesday, 29 April 2025 11:40 AM"><a href=#chatlog__message-container-1366740844140429364>29/04/2025 11:40 AM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><span class="chatlog__markdown-mention" style="color: rgb(3, 109, 14); background-color: rgba(3, 109, 14, 0.1);">@Partners</span> <span class="chatlog__markdown-mention" style="color: rgb(179, 218, 221); background-color: rgba(179, 218, 221, 0.1);">@Partner Legends</span> <span class="chatlog__markdown-mention" style="color: rgb(245, 127, 196); background-color: rgba(245, 127, 196, 0.1);">@Affiliate</span> <span class="chatlog__markdown-mention" style="color: rgb(54, 152, 120); background-color: rgba(54, 152, 120, 0.1);">@Creator Team</span> 
+
+<strong>Summer 2025 Roadmap:</strong>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="YouTube"
+    title="YouTube"
+    src="https://cdn.discordapp.com/emojis/1059258896004436029.png"> 16th May - Season 16 Content Update video
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="ReaperHop"
+    title="ReaperHop"
+    src="https://cdn.discordapp.com/emojis/991073553807982653.gif"> 22nd May - <strong>Season 16 launch!</strong>
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Blizzard"
+    title="Blizzard"
+    src="https://cdn.discordapp.com/emojis/479814648305025037.png"> 22nd May - <strong>SoT on Battle.net launch!</strong>
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 23rd-30th May - Twitch Drops (for everyone)
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="SwordSwing"
+    title="SwordSwing"
+    src="https://cdn.discordapp.com/emojis/1015265770164469860.gif"> 19th-26th June - &quot;Five Nights&quot; event 
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 20th-27th June - Partner Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="legend"
+    title="legend"
+    src="https://cdn.discordapp.com/emojis/720527677878173726.png"> 17th-31st July - &quot;Legend&#39;s Unleashed&quot; event
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 18th-25th July - Partner Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="PiggyRoll"
+    title="PiggyRoll"
+    src="https://cdn.discordapp.com/emojis/1355624340158419066.gif"> 14 August - <strong>Season 17 launch!</strong>
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 30th August-5th September - Everyone Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 19th-26th September - Partner Drops
+
+<em>Subject to change, plus some of the dates will be added a bit later, so please keep an eye on this post!</em></span> <span class=chatlog__edited-timestamp title="Tuesday, 5 August 2025 4:53 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>25</span></div><div class=chatlog__reaction title=pinched_fingers><img class="chatlog__emoji chatlog__emoji--small" alt=🤌 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f90c.svg loading=lazy> <span class=chatlog__reaction-count>8</span></div><div class=chatlog__reaction title=green_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💚 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49a.svg loading=lazy> <span class=chatlog__reaction-count>8</span></div><div class=chatlog__reaction title=loveee><img class="chatlog__emoji chatlog__emoji--small" alt=loveee src=https://cdn.discordapp.com/emojis/701133277586653186.png loading=lazy> <span class=chatlog__reaction-count>7</span></div><div class=chatlog__reaction title=amnesy1Chokbar><img class="chatlog__emoji chatlog__emoji--small" alt=amnesy1Chokbar src=https://cdn.discordapp.com/emojis/1356704847834906844.png loading=lazy> <span class=chatlog__reaction-count>1</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1411480880001843354 class=chatlog__message-container data-message-id=1411480880001843354><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/272818271399444481/avatars/a_b828a344153b70a969d3f126ed99662c.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=j0toro data-user-id=272818271399444481>🚫Back on Wednesday🚫</span> <span class=chatlog__timestamp title="Saturday, 30 August 2025 10:41 PM"><a href=#chatlog__message-container-1411480880001843354>30/08/2025 10:41 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><h2>September</h2><img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Coin_Ancient"
+    title="Coin_Ancient"
+    src="https://cdn.discordapp.com/emojis/631606603207933972.png">  28th August - 02nd September: Pirate Emporium Sale
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="CommunityWeekend"
+    title="CommunityWeekend"
+    src="https://cdn.discordapp.com/emojis/1411069185244532996.png">  30th August - 01st September: Community Weekend
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 30th August - 5th September: Everyone Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png">  5th September - 12th September for Everyone  Stretch Goal Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="SotQuartermaster"
+    title="SotQuartermaster"
+    src="https://cdn.discordapp.com/emojis/1385543455090020465.png">   18th September: UPDATE DAY
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png">  19th September - 26th September: Twitch Drops (PARTNER DROPS) 
+
+This is only a slight extension on the above, to include a couple of bits. Once there&#39;s more it will be dropped here. 
+
+<span class="chatlog__markdown-mention" style="color: rgb(245, 127, 196); background-color: rgba(245, 127, 196, 0.1);">@Affiliate</span> <span class="chatlog__markdown-mention" style="color: rgb(179, 218, 221); background-color: rgba(179, 218, 221, 0.1);">@Partner Legends</span> <span class="chatlog__markdown-mention" style="color: rgb(3, 109, 14); background-color: rgba(3, 109, 14, 0.1);">@Partners</span></span> <span class=chatlog__edited-timestamp title="Saturday, 30 August 2025 10:56 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=tt_clapCat_OwO><img class="chatlog__emoji chatlog__emoji--small" alt=tt_clapCat_OwO src=https://cdn.discordapp.com/emojis/1250083427122675824.png loading=lazy> <span class=chatlog__reaction-count>15</span></div><div class=chatlog__reaction title=ML_Heart><img class="chatlog__emoji chatlog__emoji--small" alt=ML_Heart src=https://cdn.discordapp.com/emojis/933233239609471016.png loading=lazy> <span class=chatlog__reaction-count>9</span></div><div class=chatlog__reaction title=green_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💚 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49a.svg loading=lazy> <span class=chatlog__reaction-count>5</span></div><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>8</span></div><div class=chatlog__reaction title=loveee><img class="chatlog__emoji chatlog__emoji--small" alt=loveee src=https://cdn.discordapp.com/emojis/701133277586653186.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=krakenxHeart><img class="chatlog__emoji chatlog__emoji--small" alt=krakenxHeart src=https://cdn.discordapp.com/emojis/814619159857725451.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=Cake><img class="chatlog__emoji chatlog__emoji--small" alt=Cake src=https://cdn.discordapp.com/emojis/1350430802751520769.png loading=lazy> <span class=chatlog__reaction-count>1</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1413168922227769394 class=chatlog__message-container data-message-id=1413168922227769394><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/177012792904122368/avatars/a_ec09e603e42b495e2ef3fd6ce258afe5.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=h1ghvoltage data-user-id=177012792904122368>H1gh Voltage</span> <span class=chatlog__timestamp title="Thursday, 4 September 2025 2:28 PM"><a href=#chatlog__message-container-1413168922227769394>4/09/2025 2:28 PM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><span class="chatlog__markdown-mention" style="color: rgb(3, 109, 14); background-color: rgba(3, 109, 14, 0.1);">@Partners</span> <span class="chatlog__markdown-mention" style="color: rgb(179, 218, 221); background-color: rgba(179, 218, 221, 0.1);">@Partner Legends</span>  <span class="chatlog__markdown-mention" style="color: rgb(245, 127, 196); background-color: rgba(245, 127, 196, 0.1);">@Affiliate</span> <span class="chatlog__markdown-mention" style="color: rgb(54, 152, 120); background-color: rgba(54, 152, 120, 0.1);">@Creator Team</span> 
+
+<strong>Rest of 2025 Roadmap:</strong>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 19th-26th September - Everyone Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="skytwitch"
+    title="skytwitch"
+    src="https://cdn.discordapp.com/emojis/737293343163285515.png"> 17th-19th October - TwitchCon San Diego 
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 17th-24th October - Everyone Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 14th-21st November - Everyone Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="PresenteGeneroso"
+    title="PresenteGeneroso"
+    src="https://cdn.discordapp.com/emojis/1256952403534548994.png"> 1st-18th December - Xtreme Festival of Giving Event
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="SkellyDance"
+    title="SkellyDance"
+    src="https://cdn.discordapp.com/emojis/1106867854348914718.gif"> <strong>11th December - Season 18 Launch!</strong>
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="OrbRed"
+    title="OrbRed"
+    src="https://cdn.discordapp.com/emojis/1053700692189139026.png"> 12th-14th December - <strong>THE ORB</strong>
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="GiftGiver"
+    title="GiftGiver"
+    src="https://cdn.discordapp.com/emojis/1314232761493622814.png"> 15th December-2nd January - Holiday Hauls
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Money"
+    title="Money"
+    src="https://cdn.discordapp.com/emojis/1030080275507589201.png"> 15th December-2nd January - Support a Streamer Campaign
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="CommunityWeekend"
+    title="CommunityWeekend"
+    src="https://cdn.discordapp.com/emojis/1411069185244532996.png">  31st January-2 February - Community Weekend
+
+*All subject to change, plus some of the dates will be added a bit later, so please keep an eye on this post! *</span> <span class=chatlog__edited-timestamp title="Thursday, 4 December 2025 2:38 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=hearts><img class="chatlog__emoji chatlog__emoji--small" alt=♥️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2665.svg loading=lazy> <span class=chatlog__reaction-count>17</span></div><div class=chatlog__reaction title=purple_heart><img class="chatlog__emoji chatlog__emoji--small" alt=💜 src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f49c.svg loading=lazy> <span class=chatlog__reaction-count>11</span></div><div class=chatlog__reaction title=anCheersA><img class="chatlog__emoji chatlog__emoji--small" alt=anCheersA src=https://cdn.discordapp.com/emojis/423617013894873088.gif loading=lazy> <span class=chatlog__reaction-count>4</span></div><div class=chatlog__reaction title=nateacLove><img class="chatlog__emoji chatlog__emoji--small" alt=nateacLove src=https://cdn.discordapp.com/emojis/893650282356019251.png loading=lazy> <span class=chatlog__reaction-count>3</span></div><div class=chatlog__reaction title=krakenxHeart><img class="chatlog__emoji chatlog__emoji--small" alt=krakenxHeart src=https://cdn.discordapp.com/emojis/814619159857725451.png loading=lazy> <span class=chatlog__reaction-count>3</span></div><div class=chatlog__reaction title=xbooseBalaborracha><img class="chatlog__emoji chatlog__emoji--small" alt=xbooseBalaborracha src=https://cdn.discordapp.com/emojis/1171736774276567100.png loading=lazy> <span class=chatlog__reaction-count>3</span></div><div class=chatlog__reaction title=NDACutieFruitie><img class="chatlog__emoji chatlog__emoji--small" alt=NDACutieFruitie src=https://cdn.discordapp.com/emojis/1291065491116523622.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=loveee><img class="chatlog__emoji chatlog__emoji--small" alt=loveee src=https://cdn.discordapp.com/emojis/701133277586653186.png loading=lazy> <span class=chatlog__reaction-count>3</span></div></div></div></div></div></div>
+<div class=chatlog__message-group><div id=chatlog__message-container-1460581749015974019 class=chatlog__message-container data-message-id=1460581749015974019><div class=chatlog__message><div class=chatlog__message-aside><img class=chatlog__avatar src="https://cdn.discordapp.com/guilds/550315686636027908/users/177012792904122368/avatars/a_ec09e603e42b495e2ef3fd6ce258afe5.gif?size=512" alt=Avatar loading=lazy></div><div class=chatlog__message-primary><div class=chatlog__header><span class=chatlog__author style=color:rgb(230,126,34) title=h1ghvoltage data-user-id=177012792904122368>H1gh Voltage</span> <span class=chatlog__timestamp title="Tuesday, 13 January 2026 10:30 AM"><a href=#chatlog__message-container-1460581749015974019>13/01/2026 10:30 AM</a></span></div><div class="chatlog__content chatlog__markdown"><span class=chatlog__markdown-preserve><span class="chatlog__markdown-mention" style="color: rgb(3, 109, 14); background-color: rgba(3, 109, 14, 0.1);">@Partners</span> <span class="chatlog__markdown-mention" style="color: rgb(179, 218, 221); background-color: rgba(179, 218, 221, 0.1);">@Partner Legends</span>  <span class="chatlog__markdown-mention" style="color: rgb(245, 127, 196); background-color: rgba(245, 127, 196, 0.1);">@Affiliate</span> <span class="chatlog__markdown-mention" style="color: rgb(54, 152, 120); background-color: rgba(54, 152, 120, 0.1);">@Creator Team</span> 
+
+<strong>Beginning of 2026 Roadmap:</strong>
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="EternalGuard"
+    title="EternalGuard"
+    src="https://cdn.discordapp.com/emojis/1448622058287267841.png">  22nd January - Season 18 Act 2
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 23rd-30th January - Partner Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="CommunityWeekend"
+    title="CommunityWeekend"
+    src="https://cdn.discordapp.com/emojis/1309147617439252571.png">  30th January - 2 February - Community Weekend
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="CommunityWeekend"
+    title="CommunityWeekend"
+    src="https://cdn.discordapp.com/emojis/1309147617439252571.png">  31st January - 2nd February - Stretch goal Drops become guaranteed Community Weekend Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="coin_Gold"
+    title="coin_Gold"
+    src="https://cdn.discordapp.com/emojis/712713293059588276.png"> 27th February - 2nd March - Gold &amp; Glory event
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="EternalGuard"
+    title="EternalGuard"
+    src="https://cdn.discordapp.com/emojis/1448622058287267841.png"> 5th March - Season 18 Act 3
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 6th-13th March - Partner Drops
+
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="crabledab"
+    title="crabledab"
+    src="https://cdn.discordapp.com/emojis/831375163718893588.gif"> <strong>19th March - Season 19 Launch!</strong>
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="CommunityWeekend"
+    title="CommunityWeekend"
+    src="https://cdn.discordapp.com/emojis/1309147617439252571.png">  27th March - Community Weekend
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="DoubleBarrelPistol"
+    title="DoubleBarrelPistol"
+    src="https://cdn.discordapp.com/emojis/1232763157093548162.png"> 10th-13th April - Fight Night Round 2
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="crabledab"
+    title="crabledab"
+    src="https://cdn.discordapp.com/emojis/831375163718893588.gif"> 16th April - Season 19 Act 2
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="Twitch"
+    title="Twitch"
+    src="https://cdn.discordapp.com/emojis/1059929375052664882.png"> 17th-22th April - Partner Drops
+<img
+    loading="lazy"
+    class="chatlog__emoji "
+    alt="crabledab"
+    title="crabledab"
+    src="https://cdn.discordapp.com/emojis/831375163718893588.gif"> 14th May - Season 19 Act 3
+
+*All subject to change, plus some of the dates will be added a bit later, so please keep an eye on this post! *</span> <span class=chatlog__edited-timestamp title="Friday, 20 March 2026 2:32 PM">(edited)</span></div><div class=chatlog__reactions><div class=chatlog__reaction title=heart><img class="chatlog__emoji chatlog__emoji--small" alt=❤️ src=https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg loading=lazy> <span class=chatlog__reaction-count>21</span></div><div class=chatlog__reaction title=SlimeyPigeonLove><img class="chatlog__emoji chatlog__emoji--small" alt=SlimeyPigeonLove src=https://cdn.discordapp.com/emojis/1394275986308337827.png loading=lazy> <span class=chatlog__reaction-count>4</span></div><div class=chatlog__reaction title=HypeCrab><img class="chatlog__emoji chatlog__emoji--small" alt=HypeCrab src=https://cdn.discordapp.com/emojis/869065841998721114.png loading=lazy> <span class=chatlog__reaction-count>4</span></div><div class=chatlog__reaction title=loveee><img class="chatlog__emoji chatlog__emoji--small" alt=loveee src=https://cdn.discordapp.com/emojis/701133277586653186.png loading=lazy> <span class=chatlog__reaction-count>5</span></div><div class=chatlog__reaction title=phuzzybYay><img class="chatlog__emoji chatlog__emoji--small" alt=phuzzybYay src=https://cdn.discordapp.com/emojis/1001929529423573052.png loading=lazy> <span class=chatlog__reaction-count>3</span></div><div class=chatlog__reaction title=dmaver1Love><img class="chatlog__emoji chatlog__emoji--small" alt=dmaver1Love src=https://cdn.discordapp.com/emojis/1030511996350763008.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=xbooseBalaborracha><img class="chatlog__emoji chatlog__emoji--small" alt=xbooseBalaborracha src=https://cdn.discordapp.com/emojis/1171736774276567100.png loading=lazy> <span class=chatlog__reaction-count>2</span></div><div class=chatlog__reaction title=krakenxHeart><img class="chatlog__emoji chatlog__emoji--small" alt=krakenxHeart src=https://cdn.discordapp.com/emojis/814619159857725451.png loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=YIPPIE><img class="chatlog__emoji chatlog__emoji--small" alt=YIPPIE src=https://cdn.discordapp.com/emojis/1419721144935776326.gif loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=MonkyJVCoeurBoom><img class="chatlog__emoji chatlog__emoji--small" alt=MonkyJVCoeurBoom src=https://cdn.discordapp.com/emojis/1260849337928257626.gif loading=lazy> <span class=chatlog__reaction-count>1</span></div><div class=chatlog__reaction title=Cake><img class="chatlog__emoji chatlog__emoji--small" alt=Cake src=https://cdn.discordapp.com/emojis/1350430802751520769.png loading=lazy> <span class=chatlog__reaction-count>1</span></div></div></div></div></div></div>
+
+</div>
+<div class=postamble><div class=postamble__entry>Exported 21 message(s)</div><div class=postamble__entry>Timezone: UTC+0</div></div>

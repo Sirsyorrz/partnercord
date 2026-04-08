@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sea of Thieves Creators — Discord Archive</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+  <nav class="sidebar">
+    <div class="server-header">⚓ SoT Creators Archive</div>
+    <div class="channel-list" id="sidebar-channels">
+      <div class="loading">Loading channels…</div>
+    </div>
+  </nav>
+  <div class="main">
+    <div class="main-header">
+      <span class="page-title" id="channel-title"># channel</span>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search messages…" autocomplete="off">
+        <button id="search-scope-btn" class="btn-secondary" title="Toggle global search">This channel</button>
+        <button id="search-clear-btn" class="btn-secondary hidden">✕</button>
+        <input type="date" id="date-jump-input" title="Jump to date" class="date-jump-input">
+      </div>
+    </div>
+    <div id="search-results-panel" class="search-results hidden"></div>
+    <div id="search-navigator" class="search-navigator hidden">
+      <button id="nav-prev" class="nav-btn" title="Previous result (Ctrl+Shift+G / Shift+F3)">‹ Prev</button>
+      <span id="nav-counter" class="nav-counter">Result 1 of 47</span>
+      <button id="nav-next" class="nav-btn" title="Next result (Ctrl+G / F3)">Next ›</button>
+      <button id="nav-clear" class="nav-clear" title="Clear search">✕</button>
+    </div>
+    <div class="messages-wrapper">
+      <div class="messages-container" id="messages-container">
+        <div class="loading" id="messages-loading">Select a channel to view messages.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script src="js/search.js"></script>
+</body>
+</html>

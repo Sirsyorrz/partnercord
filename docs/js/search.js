@@ -1,0 +1,461 @@
+'use strict';
+
+// Search module — depends on app.js globals:
+//   channelList, currentChannelId, currentMessages, filteredMessages,
+//   renderMessages, jumpToMessage, jumpToIndex, navigateToChannel, loadJSON, escapeHtml, formatTs, DATA
+//   pendingJumpId, pendingSearchTerm (written here, read by loadChannel in app.js)
+
+let searchMode = 'channel'; // 'channel' | 'global'
+let searchIndexCache = {};  // channelId -> parsed index
+
+// Channel search state
+let searchHits = [];        // indices into currentMessages of matching messages
+let searchHitSet = new Set(); // same as searchHits but as a Set of message IDs for quick DOM lookup
+let currentHitIndex = -1;   // which hit we're on (-1 = none)
+let activeSearchTerm = '';
+
+// ── Init ──────────────────────────────────────────────────────
+
+let keyboardListenerAdded = false;
+
+function initSearch(channelId) {
+  const input = document.getElementById('search-input');
+  const scopeBtn = document.getElementById('search-scope-btn');
+  const clearBtn = document.getElementById('search-clear-btn');
+  if (!input) return;
+
+  // Reset state (navigator hidden by loadChannel already)
+  input.value = '';
+  activeSearchTerm = '';
+  searchHits = [];
+  searchHitSet = new Set();
+  currentHitIndex = -1;
+
+  input.oninput = debounce(() => {
+    const q = input.value.trim();
+    activeSearchTerm = q;
+    if (!q) { clearSearch(); return; }
+    if (clearBtn) clearBtn.classList.remove('hidden');
+    if (searchMode === 'channel') doChannelSearch(q);
+    else doGlobalSearch(q);
+  }, 250);
+
+  if (scopeBtn) {
+    scopeBtn.onclick = () => {
+      searchMode = searchMode === 'channel' ? 'global' : 'channel';
+      scopeBtn.textContent = searchMode === 'channel' ? 'This channel' : 'All channels';
+      scopeBtn.classList.toggle('active', searchMode === 'global');
+      const q = input.value.trim();
+      if (q) {
+        if (searchMode === 'channel') doChannelSearch(q);
+        else doGlobalSearch(q);
+      }
+    };
+  }
+
+  if (clearBtn) {
+    clearBtn.onclick = () => {
+      input.value = '';
+      activeSearchTerm = '';
+      clearBtn.classList.add('hidden');
+      clearSearch();
+    };
+  }
+
+  // Wire up navigator buttons (idempotent — onclick replaces previous)
+  const prevBtn = document.getElementById('nav-prev');
+  const nextBtn = document.getElementById('nav-next');
+  const navClear = document.getElementById('nav-clear');
+
+  if (prevBtn) prevBtn.onclick = () => { if (currentHitIndex > 0) jumpToHit(currentHitIndex - 1); };
+  if (nextBtn) nextBtn.onclick = () => { if (currentHitIndex < searchHits.length - 1) jumpToHit(currentHitIndex + 1); };
+  if (navClear) {
+    navClear.onclick = () => {
+      input.value = '';
+      activeSearchTerm = '';
+      if (clearBtn) clearBtn.classList.add('hidden');
+      clearSearch();
+    };
+  }
+
+  // Keyboard shortcuts — attach once per page load
+  if (!keyboardListenerAdded) {
+    keyboardListenerAdded = true;
+    document.addEventListener('keydown', e => {
+      if (!searchHits.length || searchMode !== 'channel') return;
+      const key = e.key;
+      // Ctrl+G = next, Ctrl+Shift+G = prev; F3 = next, Shift+F3 = prev
+      const isNext = (e.ctrlKey && !e.shiftKey && key === 'g') || (!e.ctrlKey && !e.shiftKey && key === 'F3');
+      const isPrev = (e.ctrlKey && e.shiftKey && key === 'g') || (!e.ctrlKey && e.shiftKey && key === 'F3');
+      if (isNext || isPrev) {
+        e.preventDefault();
+        if (isNext && currentHitIndex < searchHits.length - 1) jumpToHit(currentHitIndex + 1);
+        if (isPrev && currentHitIndex > 0) jumpToHit(currentHitIndex - 1);
+      }
+    });
+  }
+}
+
+// Called by app.js (loadChannel) after a cross-channel navigate to apply a pending search
+function triggerChannelSearch(term) {
+  const input = document.getElementById('search-input');
+  const clearBtn = document.getElementById('search-clear-btn');
+  if (input) input.value = term;
+  if (clearBtn) clearBtn.classList.remove('hidden');
+  activeSearchTerm = term;
+  searchMode = 'channel';
+  const scopeBtn = document.getElementById('search-scope-btn');
+  if (scopeBtn) { scopeBtn.textContent = 'This channel'; scopeBtn.classList.remove('active'); }
+  doChannelSearch(term);
+}
+
+// Called by app.js sentinel observer and jumpToIndex rAF — reapplies highlights to newly rendered messages
+function afterMessagesRendered() {
+  if (!activeSearchTerm || searchMode !== 'channel') return;
+  applySearchHighlights();
+}
+
+// ── Clear ─────────────────────────────────────────────────────
+
+function clearSearch() {
+  searchHits = [];
+  searchHitSet = new Set();
+  currentHitIndex = -1;
+  clearSearchHighlights();
+
+  const panel = document.getElementById('search-results-panel');
+  if (panel) panel.classList.add('hidden');
+  const nav = document.getElementById('search-navigator');
+  if (nav) nav.classList.add('hidden');
+}
+
+function clearSearchHighlights() {
+  // Remove <mark class="search-hit"> tags (unwrap to text)
+  const container = document.getElementById('messages-container');
+  if (!container) return;
+  container.querySelectorAll('mark.search-hit').forEach(mark => {
+    const parent = mark.parentNode;
+    if (!parent) return;
+    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+    parent.normalize();
+  });
+  // Remove hit background class
+  container.querySelectorAll('.search-hit-msg').forEach(el => el.classList.remove('search-hit-msg'));
+}
+
+// ── Channel search ────────────────────────────────────────────
+
+function doChannelSearch(q) {
+  if (!currentMessages) return;
+
+  // Hide global results panel, show navigator
+  const panel = document.getElementById('search-results-panel');
+  if (panel) panel.classList.add('hidden');
+
+  clearSearchHighlights();
+
+  const ql = q.toLowerCase();
+  searchHits = [];
+  searchHitSet = new Set();
+
+  for (let i = 0; i < currentMessages.length; i++) {
+    const m = currentMessages[i];
+    if (
+      (m.plainText && m.plainText.toLowerCase().includes(ql)) ||
+      (m.authorName && m.authorName.toLowerCase().includes(ql)) ||
+      (m.authorUsername && m.authorUsername.toLowerCase().includes(ql))
+    ) {
+      searchHits.push(i);
+      searchHitSet.add(String(m.id));
+    }
+  }
+
+  showNavigator(searchHits.length);
+
+  if (searchHits.length === 0) return;
+
+  // Apply highlights to currently rendered messages
+  applySearchHighlights();
+
+  jumpToHit(0);
+}
+
+function showNavigator(count) {
+  const nav = document.getElementById('search-navigator');
+  const counter = document.getElementById('nav-counter');
+  const prevBtn = document.getElementById('nav-prev');
+  const nextBtn = document.getElementById('nav-next');
+  if (!nav) return;
+
+  nav.classList.remove('hidden');
+
+  if (count === 0) {
+    if (counter) counter.textContent = 'No results';
+    if (prevBtn) prevBtn.disabled = true;
+    if (nextBtn) nextBtn.disabled = true;
+    return;
+  }
+
+  updateNavigator();
+}
+
+function updateNavigator() {
+  const counter = document.getElementById('nav-counter');
+  const prevBtn = document.getElementById('nav-prev');
+  const nextBtn = document.getElementById('nav-next');
+
+  if (counter) counter.textContent = `Result ${currentHitIndex + 1} of ${searchHits.length}`;
+  if (prevBtn) prevBtn.disabled = currentHitIndex <= 0;
+  if (nextBtn) nextBtn.disabled = currentHitIndex >= searchHits.length - 1;
+}
+
+function jumpToHit(hitIndex) {
+  if (!searchHits.length) return;
+  hitIndex = Math.max(0, Math.min(hitIndex, searchHits.length - 1));
+  currentHitIndex = hitIndex;
+  updateNavigator();
+
+  const msgIndex = searchHits[hitIndex];
+  const targetMsg = currentMessages[msgIndex];
+  if (!targetMsg) return;
+
+  const el = document.getElementById(`msg-${targetMsg.id}`);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Flash highlight (reuse app.js .highlighted class)
+    el.classList.remove('highlighted');
+    void el.offsetWidth; // force reflow to restart transition
+    el.classList.add('highlighted');
+    setTimeout(() => el.classList.remove('highlighted'), 2000);
+    applySearchHighlights();
+  } else {
+    // Message not rendered — jumpToIndex will re-render and call afterMessagesRendered
+    jumpToIndex(msgIndex);
+    // afterMessagesRendered → applySearchHighlights will be called from the rAF in jumpToIndex
+  }
+}
+
+// ── Text highlighting ─────────────────────────────────────────
+
+function applySearchHighlights() {
+  if (!activeSearchTerm || !searchHitSet.size) return;
+  const container = document.getElementById('messages-container');
+  if (!container) return;
+
+  // First clear existing marks (in case of re-render)
+  container.querySelectorAll('mark.search-hit').forEach(mark => {
+    const parent = mark.parentNode;
+    if (!parent) return;
+    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+    parent.normalize();
+  });
+  container.querySelectorAll('.search-hit-msg').forEach(el => el.classList.remove('search-hit-msg'));
+
+  const ql = activeSearchTerm.toLowerCase();
+  const escapedQ = escapeRegex(activeSearchTerm);
+  const re = new RegExp(escapedQ, 'gi');
+
+  // Walk all rendered message containers
+  container.querySelectorAll('.message-container').forEach(msgEl => {
+    const msgId = msgEl.id.replace(/^msg-/, '');
+    if (!searchHitSet.has(msgId)) return;
+
+    msgEl.classList.add('search-hit-msg');
+
+    // Highlight text inside .message-content and .message-header
+    const contentEl = msgEl.querySelector('.message-content');
+    if (contentEl) highlightTextInElement(contentEl, re);
+  });
+}
+
+function highlightTextInElement(el, re) {
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      // Skip text inside existing marks, code, and pre elements
+      let p = node.parentNode;
+      while (p && p !== el) {
+        const tag = p.nodeName;
+        if (tag === 'MARK' || tag === 'CODE' || tag === 'PRE') return NodeFilter.FILTER_REJECT;
+        p = p.parentNode;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  const textNodes = [];
+  let node;
+  while ((node = walker.nextNode())) textNodes.push(node);
+
+  for (const textNode of textNodes) {
+    const text = textNode.textContent;
+    re.lastIndex = 0;
+    if (!re.test(text)) continue;
+    re.lastIndex = 0;
+
+    const parts = text.split(re);
+    if (parts.length <= 1) continue;
+
+    const frag = document.createDocumentFragment();
+    re.lastIndex = 0;
+    let match;
+    let lastIdx = 0;
+
+    while ((match = re.exec(text)) !== null) {
+      if (match.index > lastIdx) {
+        frag.appendChild(document.createTextNode(text.slice(lastIdx, match.index)));
+      }
+      const mark = document.createElement('mark');
+      mark.className = 'search-hit';
+      mark.textContent = match[0];
+      frag.appendChild(mark);
+      lastIdx = re.lastIndex;
+    }
+    if (lastIdx < text.length) {
+      frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+    }
+
+    textNode.parentNode.replaceChild(frag, textNode);
+  }
+}
+
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// ── Global search ─────────────────────────────────────────────
+
+async function doGlobalSearch(q) {
+  // Clear channel search state
+  clearSearchHighlights();
+  searchHits = [];
+  searchHitSet = new Set();
+  currentHitIndex = -1;
+  const nav = document.getElementById('search-navigator');
+  if (nav) nav.classList.add('hidden');
+
+  const panel = document.getElementById('search-results-panel');
+  if (panel) { panel.classList.remove('hidden'); panel.innerHTML = '<div class="loading">Searching…</div>'; }
+
+  const ql = q.toLowerCase();
+  const allResults = []; // { channel, messages: [] }
+
+  for (const ch of channelList) {
+    if (!searchIndexCache[ch.id]) {
+      try {
+        searchIndexCache[ch.id] = await loadJSON(`${DATA}search-${ch.id}.json`);
+      } catch { searchIndexCache[ch.id] = []; }
+    }
+    const idx = searchIndexCache[ch.id];
+    const hits = idx.filter(m =>
+      (m.text && m.text.toLowerCase().includes(ql)) ||
+      (m.authorName && m.authorName.toLowerCase().includes(ql)) ||
+      (m.authorUsername && m.authorUsername.toLowerCase().includes(ql))
+    );
+    if (hits.length > 0) allResults.push({ channel: ch, messages: hits });
+  }
+
+  const total = allResults.reduce((s, r) => s + r.messages.length, 0);
+  const channelCount = allResults.length;
+
+  if (!panel) return;
+  if (total === 0) {
+    panel.innerHTML = '<div class="search-count">No results found.</div>';
+    return;
+  }
+
+  let html = `<div class="search-count">${total.toLocaleString()} result${total !== 1 ? 's' : ''} in ${channelCount} channel${channelCount !== 1 ? 's' : ''}</div>`;
+
+  // Channel pills summary
+  html += '<div class="search-channel-pills">';
+  for (const { channel, messages } of allResults) {
+    html += `<button class="search-channel-pill" data-jump-channel="${escapeHtml(channel.id)}" data-search-q="${escapeHtml(q)}">#${escapeHtml(channel.name)} <span class="pill-count">${messages.length.toLocaleString()}</span></button>`;
+  }
+  html += '</div>';
+
+  for (const { channel, messages } of allResults) {
+    const shown = messages.slice(0, 5);
+    html += `<div class="search-channel-group">
+      <div class="search-channel-header"># ${escapeHtml(channel.name)} — ${messages.length.toLocaleString()} result${messages.length !== 1 ? 's' : ''}</div>`;
+    for (const m of shown) {
+      const ts = formatTs(m.timestamp);
+      const snippet = highlightSnippet(truncate(m.text, 120), q);
+      html += `<div class="search-result-item">
+        <span class="search-author">${escapeHtml(m.authorName || m.authorUsername || '?')}</span>
+        <span class="search-ts">${escapeHtml(ts)}</span>
+        <a class="jump-link" href="channel.html#${escapeHtml(channel.id)}" data-jump-channel="${escapeHtml(channel.id)}" data-jump-msg="${escapeHtml(String(m.id))}">Jump →</a>
+        <div class="search-snippet">${snippet}</div>
+      </div>`;
+    }
+    if (messages.length > 5) {
+      html += `<div class="search-more">… and ${(messages.length - 5).toLocaleString()} more — <button class="search-show-channel" data-jump-channel="${escapeHtml(channel.id)}" data-search-q="${escapeHtml(q)}">Search in #${escapeHtml(channel.name)}</button></div>`;
+    }
+    html += '</div>';
+  }
+
+  panel.innerHTML = html;
+
+  // Wire up channel pill clicks — switch to channel-mode search for that channel
+  panel.querySelectorAll('[data-jump-channel][data-search-q]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const cid = btn.dataset.jumpChannel;
+      const term = btn.dataset.searchQ;
+      if (cid === currentChannelId) {
+        // Switch to channel search mode for this channel
+        searchMode = 'channel';
+        const scopeBtn = document.getElementById('search-scope-btn');
+        if (scopeBtn) { scopeBtn.textContent = 'This channel'; scopeBtn.classList.remove('active'); }
+        doChannelSearch(term);
+      } else {
+        // Navigate to channel and trigger search there
+        pendingSearchTerm = term;
+        navigateToChannel(cid);
+      }
+    });
+  });
+
+  // Wire up jump links — scroll to specific message
+  panel.querySelectorAll('a[data-jump-channel][data-jump-msg]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const cid = a.dataset.jumpChannel;
+      const mid = a.dataset.jumpMsg;
+      if (cid === currentChannelId) {
+        scrollToMessage(mid);
+      } else {
+        pendingJumpId = mid;
+        navigateToChannel(cid);
+      }
+    });
+  });
+}
+
+function scrollToMessage(msgId) {
+  const el = document.getElementById(`msg-${msgId}`);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('highlighted');
+    setTimeout(() => el.classList.remove('highlighted'), 2000);
+  } else {
+    if (typeof jumpToMessage === 'function') jumpToMessage(msgId);
+  }
+}
+
+// ── Utilities ─────────────────────────────────────────────────
+
+function highlightSnippet(text, q) {
+  if (!q) return escapeHtml(text);
+  const safe = escapeHtml(text);
+  const safeQ = escapeRegex(escapeHtml(q));
+  return safe.replace(new RegExp(`(${safeQ})`, 'gi'), '<mark>$1</mark>');
+}
+
+function truncate(str, max) {
+  if (!str) return '';
+  return str.length <= max ? str : str.slice(0, max) + '…';
+}
+
+function debounce(fn, ms) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}

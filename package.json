@@ -1,0 +1,9 @@
+{
+  "name": "partnercord",
+  "version": "1.0.0",
+  "description": "Sea of Thieves Creators Discord Archive",
+  "scripts": {
+    "build": "node scripts/parse.js"
+  },
+  "engines": { "node": ">=18" }
+}

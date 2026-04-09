@@ -1042,6 +1042,36 @@ a { color: var(--link); }
 .search-sort-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
 .search-sort-btn.active { background: rgba(255,255,255,0.22); color: #fff; font-weight: 700; }
 
+/* ── Navigator match mode buttons ────────────────── */
+.nav-match {
+  display: flex;
+  gap: 3px;
+  margin-left: 4px;
+}
+
+/* ── Search dropdown match mode ──────────────────── */
+.search-match-mode-wrap {
+  display: flex;
+  gap: 6px;
+  padding: 6px 12px 10px;
+}
+.search-match-mode-btn {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 6px;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+.search-match-mode-btn:hover { background: rgba(255,255,255,0.13); color: var(--text-primary); border-color: rgba(255,255,255,0.2); }
+.search-match-mode-btn.active { background: rgba(88,101,242,0.35); color: #dee0fc; border-color: rgba(88,101,242,0.5); font-weight: 700; }
+
 /* ── Search results panel redesign ──────────────── */
 .search-results-header {
   display: flex;

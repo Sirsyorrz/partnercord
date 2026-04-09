@@ -357,6 +357,33 @@ function setupDateJump() {
   input.addEventListener('change', () => jumpToDate(input.value));
 }
 
+// ── Jump oldest / newest ───────────────────────────────────────
+
+function setupJumpButtons() {
+  const oldestBtn = document.getElementById('jump-oldest-btn');
+  const newestBtn = document.getElementById('jump-newest-btn');
+
+  if (oldestBtn) {
+    oldestBtn.onclick = () => {
+      if (!renderMsgs.length) return;
+      jumpToIndex(0);
+    };
+  }
+
+  if (newestBtn) {
+    newestBtn.onclick = () => {
+      if (!renderMsgs.length) return;
+      const container = document.getElementById('messages-container');
+      // If all messages already rendered, just scroll to bottom
+      if (!scrollObserver && container) {
+        container.scrollTop = container.scrollHeight;
+      } else {
+        jumpToIndex(renderMsgs.length - 1);
+      }
+    };
+  }
+}
+
 // ── Init ───────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -386,6 +413,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (isChannelPage) {
     setupDateJump();
+    setupJumpButtons();
     window.addEventListener('popstate', handleHash);
     handleHash();
   } else if (typeof initStats === 'function') {

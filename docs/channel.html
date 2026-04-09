@@ -27,15 +27,21 @@
     <div id="search-results-panel" class="search-results hidden"></div>
     <div id="search-navigator" class="search-navigator hidden">
       <button id="nav-prev" class="nav-btn" title="Previous result (Ctrl+Shift+G / Shift+F3)">‹ Prev</button>
-      <span id="nav-counter" class="nav-counter">Result 1 of 47</span>
+      <span class="nav-counter" id="nav-counter-wrap">
+        Result <input id="nav-jump-input" class="nav-jump-input" type="number" min="1" value="1"> of <span id="nav-total">0</span>
+      </span>
       <button id="nav-next" class="nav-btn" title="Next result (Ctrl+G / F3)">Next ›</button>
       <button id="nav-clear" class="nav-clear" title="Clear search">✕</button>
     </div>
     <div class="messages-wrapper">
+      <div class="jump-nav-bar" id="jump-nav-bar">
+        <button id="jump-oldest-btn" class="jump-nav-btn" title="Jump to oldest message">⟨⟨ Oldest</button>
+        <button id="jump-newest-btn" class="jump-nav-btn" title="Jump to newest message">Newest ⟩⟩</button>
+      </div>
+      <div id="search-hints" class="search-hints hidden"></div>
       <div class="messages-container" id="messages-container">
         <div class="loading" id="messages-loading">Select a channel to view messages.</div>
       </div>
-
     </div>
   </div>
 </div>

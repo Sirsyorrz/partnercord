@@ -151,15 +151,18 @@ function parseSearchQuery(q) {
   const filters = {
     text: '',
     from: [],      // array of lowercase strings (OR logic)
+    mentions: [],  // array of lowercase strings — messages @mentioning this user
     before: null,  // ms timestamp (exclusive)
     after: null,   // ms timestamp (exclusive)
     during: null,  // { year, month } or { year, month: null }
-    has: new Set(), // 'link' | 'image' | 'embed'
+    has: new Set(), // 'link' | 'image' | 'embed' | 'file' | 'video' | 'audio' | 'sticker'
+    in: [],        // channel name substrings for global search
+    pinned: null,  // reserved for future use — data not available
   };
 
   // Extract filter tokens, collect remaining text
   let remaining = q;
-  const tokenRe = /\b(from|before|after|during|has):(\S+)/gi;
+  const tokenRe = /\b(from|mentions|before|after|during|has|in|pinned):(\S+)/gi;
   const consumed = [];
   let match;
   while ((match = tokenRe.exec(q)) !== null) {
@@ -169,6 +172,8 @@ function parseSearchQuery(q) {
 
     if (key === 'from') {
       filters.from.push(val.toLowerCase());
+    } else if (key === 'mentions') {
+      filters.mentions.push(val.toLowerCase());
     } else if (key === 'before') {
       const ms = new Date(val).getTime();
       if (!isNaN(ms)) filters.before = ms;
@@ -183,7 +188,11 @@ function parseSearchQuery(q) {
       else if (mYear) filters.during = { year: parseInt(mYear[1]), month: null };
     } else if (key === 'has') {
       const v = val.toLowerCase();
-      if (v === 'link' || v === 'image' || v === 'embed') filters.has.add(v);
+      if (['link','image','embed','file','video','audio','sticker'].includes(v)) filters.has.add(v);
+    } else if (key === 'in') {
+      filters.in.push(val.toLowerCase());
+    } else if (key === 'pinned') {
+      // pinned: not yet supported — data not in channel JSON
     }
   }
 

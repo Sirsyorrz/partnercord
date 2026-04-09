@@ -8,6 +8,7 @@
 let searchMode = 'channel'; // 'channel' | 'global'
 let searchIndexCache = {};  // channelId -> parsed index
 let searchSortOrder = 'newest'; // 'newest' | 'oldest'
+let searchMatchMode = 'contains'; // 'contains' | 'exact' | 'fuzzy'
 
 // Channel search state
 let searchHits = [];        // indices into currentMessages of matching messages
@@ -58,6 +59,21 @@ function initSearch(channelId) {
         input.focus();
         // Programmatic value change doesn't fire oninput — dispatch manually
         input.dispatchEvent(new Event('input', { bubbles: true }));
+      };
+    });
+
+    // Match mode buttons in dropdown
+    dropdown.querySelectorAll('.search-match-mode-btn[data-match-mode]').forEach(btn => {
+      btn.onmousedown = e => {
+        e.preventDefault();
+        setMatchMode(btn.dataset.matchMode);
+        dropdown.classList.add('hidden');
+        input.focus();
+        const q = input.value.trim();
+        if (q) {
+          if (searchMode === 'channel') doChannelSearch(q);
+          else doGlobalSearch(q);
+        }
       };
     });
   }
@@ -134,6 +150,30 @@ function initSearch(channelId) {
       sortOldest.classList.add('active');
       if (sortNewest) sortNewest.classList.remove('active');
       if (activeSearchTerm && searchMode === 'channel') doChannelSearch(activeSearchTerm);
+    };
+  }
+
+  // ── Match mode buttons (navigator) ───────────────────────
+  const matchExactBtn = document.getElementById('nav-match-exact');
+  const matchFuzzyBtn = document.getElementById('nav-match-fuzzy');
+  if (matchExactBtn) {
+    matchExactBtn.onclick = () => {
+      setMatchMode(searchMatchMode === 'exact' ? 'contains' : 'exact');
+      const q = input ? input.value.trim() : activeSearchTerm;
+      if (q) {
+        if (searchMode === 'channel') doChannelSearch(q);
+        else doGlobalSearch(q);
+      }
+    };
+  }
+  if (matchFuzzyBtn) {
+    matchFuzzyBtn.onclick = () => {
+      setMatchMode(searchMatchMode === 'fuzzy' ? 'contains' : 'fuzzy');
+      const q = input ? input.value.trim() : activeSearchTerm;
+      if (q) {
+        if (searchMode === 'channel') doChannelSearch(q);
+        else doGlobalSearch(q);
+      }
     };
   }
 
@@ -269,8 +309,7 @@ function filtersActive(filters) {
 
 function messageMatchesFilters(msg, filters) {
   if (filters.text) {
-    const tl = filters.text.toLowerCase();
-    if (!msg.plainText || !msg.plainText.toLowerCase().includes(tl)) return false;
+    if (!msg.plainText || !textMatchesTerm(msg.plainText, filters.text, searchMatchMode)) return false;
   }
 
   if (filters.from.length > 0) {
@@ -423,7 +462,7 @@ function applySearchHighlights() {
   container.querySelectorAll('.search-hit-msg').forEach(el => el.classList.remove('search-hit-msg'));
 
   const re = activeHighlightTerm
-    ? new RegExp(escapeRegex(activeHighlightTerm), 'gi')
+    ? buildHighlightRegex(activeHighlightTerm, searchMatchMode)
     : null;
 
   container.querySelectorAll('.message-container').forEach(msgEl => {
@@ -492,6 +531,50 @@ function escapeRegex(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+// ── Match mode helpers ────────────────────────────────────
+
+function setMatchMode(mode) {
+  searchMatchMode = mode;
+  // Sync dropdown buttons
+  document.querySelectorAll('.search-match-mode-btn[data-match-mode]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.matchMode === mode);
+  });
+  // Sync navigator buttons
+  const exact = document.getElementById('nav-match-exact');
+  const fuzzy = document.getElementById('nav-match-fuzzy');
+  if (exact) exact.classList.toggle('active', mode === 'exact');
+  if (fuzzy) fuzzy.classList.toggle('active', mode === 'fuzzy');
+}
+
+function textMatchesTerm(text, term, mode) {
+  if (!text || !term) return false;
+  const tl = text.toLowerCase();
+  const ql = term.toLowerCase();
+  if (mode === 'exact') {
+    return new RegExp('\\b' + escapeRegex(ql) + '\\b', 'i').test(text);
+  } else if (mode === 'fuzzy') {
+    let ti = 0;
+    for (let i = 0; i < tl.length && ti < ql.length; i++) {
+      if (tl[i] === ql[ti]) ti++;
+    }
+    return ti === ql.length;
+  }
+  // 'contains' (default)
+  return tl.includes(ql);
+}
+
+function buildHighlightRegex(term, mode) {
+  if (!term) return null;
+  if (mode === 'exact') {
+    return new RegExp('\\b' + escapeRegex(term) + '\\b', 'gi');
+  } else if (mode === 'fuzzy') {
+    // Match the shortest span where each char appears in order
+    const chars = [...term].map(c => escapeRegex(c));
+    return new RegExp(chars.join('[\\s\\S]*?'), 'gi');
+  }
+  return new RegExp(escapeRegex(term), 'gi');
+}
+
 // ── Global search ─────────────────────────────────────────────
 
 function getAvatarColor(name) {
@@ -526,7 +609,8 @@ async function doGlobalSearch(q) {
     const hits = idx.filter(m => {
       // Text match (also match author name when no from: filter is set)
       if (ql) {
-        const textMatch = m.text && m.text.toLowerCase().includes(ql);
+        const textMatch = m.text && textMatchesTerm(m.text, ql, searchMatchMode);
+        // Author name fallback only uses contains (mode doesn't apply to name search)
         const authorFallback = !filters.from.length && (
           (m.authorName && m.authorName.toLowerCase().includes(ql)) ||
           (m.authorUsername && m.authorUsername.toLowerCase().includes(ql))
@@ -694,7 +778,16 @@ function highlightSnippet(text, q) {
   if (!q) return escapeHtml(text);
   const safe = escapeHtml(text);
   const safeQ = escapeRegex(escapeHtml(q));
-  return safe.replace(new RegExp(`(${safeQ})`, 'gi'), '<mark>$1</mark>');
+  let pattern;
+  if (searchMatchMode === 'exact') {
+    pattern = `(\\b${safeQ}\\b)`;
+  } else if (searchMatchMode === 'fuzzy') {
+    const chars = [...escapeHtml(q)].map(c => escapeRegex(c));
+    pattern = `(${chars.join('[\\s\\S]*?')})`;
+  } else {
+    pattern = `(${safeQ})`;
+  }
+  return safe.replace(new RegExp(pattern, 'gi'), '<mark>$1</mark>');
 }
 
 function truncate(str, max) {

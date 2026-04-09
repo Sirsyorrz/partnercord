@@ -50,6 +50,13 @@
               <span class="search-filter-label sfl-yellow">DURING</span>
               <div><div class="search-filter-desc">Messages during a month or year</div><div class="search-filter-example">during:2024-03 · during:2024</div></div>
             </div>
+            <div class="search-dropdown-divider"></div>
+            <div class="search-dropdown-header">Match Mode</div>
+            <div class="search-match-mode-wrap">
+              <button class="search-match-mode-btn active" data-match-mode="contains" title="Default: match anywhere in word">Contains</button>
+              <button class="search-match-mode-btn" data-match-mode="exact" title="Match whole words only">Exact Word</button>
+              <button class="search-match-mode-btn" data-match-mode="fuzzy" title="Characters appear in order, gaps allowed">Fuzzy</button>
+            </div>
           </div>
         </div>
         <input type="date" id="date-jump-input" title="Jump to date" class="date-jump-input">
@@ -63,6 +70,10 @@
       <div class="nav-sort">
         <button id="nav-sort-newest" class="search-sort-btn active" title="Newest first">Newest</button>
         <button id="nav-sort-oldest" class="search-sort-btn" title="Oldest first">Oldest</button>
+      </div>
+      <div class="nav-match">
+        <button id="nav-match-exact" class="search-sort-btn" title="Exact whole-word match">Exact</button>
+        <button id="nav-match-fuzzy" class="search-sort-btn" title="Fuzzy match (chars in order)">Fuzzy</button>
       </div>
       <button id="nav-clear" class="nav-clear" title="Clear search">✕</button>
     </div>

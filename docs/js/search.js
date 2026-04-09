@@ -34,34 +34,31 @@ function initSearch(channelId) {
   searchHitSet = new Set();
   currentHitIndex = -1;
 
-  // ── Search dropdown ──────────────────────────────────────
+  // ── Search dropdown (use property assignment — idempotent across initSearch calls) ──
   if (dropdown) {
-    // Show on focus when input is empty
-    input.addEventListener('focus', () => {
+    input.onfocus = () => {
       if (!input.value.trim()) dropdown.classList.remove('hidden');
-    });
-
-    // Hide on blur (delay to allow item clicks to register)
-    input.addEventListener('blur', () => {
+    };
+    input.onblur = () => {
       setTimeout(() => dropdown.classList.add('hidden'), 160);
-    });
+    };
 
-    // Wire up filter item clicks — insert filter token at cursor
     dropdown.querySelectorAll('.search-dropdown-item[data-filter]').forEach(item => {
-      item.addEventListener('mousedown', e => {
-        e.preventDefault(); // prevent blur before click fires
+      item.onmousedown = e => {
+        e.preventDefault();
         const filter = item.dataset.filter;
         const pos = input.selectionStart;
         const before = input.value.slice(0, pos);
         const after = input.value.slice(pos);
-        // Add space before filter if needed
         const sep = before.length > 0 && !before.endsWith(' ') ? ' ' : '';
         input.value = before + sep + filter + after;
         const newPos = pos + sep.length + filter.length;
         input.setSelectionRange(newPos, newPos);
-        input.focus();
         dropdown.classList.add('hidden');
-      });
+        input.focus();
+        // Programmatic value change doesn't fire oninput — dispatch manually
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      };
     });
   }
 
@@ -262,6 +259,7 @@ function filtersActive(filters) {
   return (
     filters.text !== '' ||
     filters.from.length > 0 ||
+    filters.mentions.length > 0 ||
     filters.before !== null ||
     filters.after !== null ||
     filters.during !== null ||
@@ -280,6 +278,16 @@ function messageMatchesFilters(msg, filters) {
     const uname = (msg.authorUsername || '').toLowerCase();
     const matches = filters.from.some(f => name.includes(f) || uname.includes(f));
     if (!matches) return false;
+  }
+
+  // mentions: — check contentHtml for @mention spans, fall back to plainText
+  if (filters.mentions.length > 0) {
+    const html = (msg.contentHtml || '').toLowerCase();
+    const plain = (msg.plainText || '').toLowerCase();
+    const matched = filters.mentions.some(f =>
+      html.includes('@' + f) || plain.includes('@' + f)
+    );
+    if (!matched) return false;
   }
 
   if (filters.before !== null && msg.timestampMs >= filters.before) return false;
@@ -504,7 +512,8 @@ async function doGlobalSearch(q) {
   const panel = document.getElementById('search-results-panel');
   if (panel) { panel.classList.remove('hidden'); panel.innerHTML = '<div class="loading">Searching…</div>'; }
 
-  const ql = q.toLowerCase();
+  const filters = parseSearchQuery(q);
+  const ql = filters.text.toLowerCase();
   const allResults = [];
 
   for (const ch of channelList) {
@@ -514,11 +523,41 @@ async function doGlobalSearch(q) {
       } catch { searchIndexCache[ch.id] = []; }
     }
     const idx = searchIndexCache[ch.id];
-    const hits = idx.filter(m =>
-      (m.text && m.text.toLowerCase().includes(ql)) ||
-      (m.authorName && m.authorName.toLowerCase().includes(ql)) ||
-      (m.authorUsername && m.authorUsername.toLowerCase().includes(ql))
-    );
+    const hits = idx.filter(m => {
+      // Text match (also match author name when no from: filter is set)
+      if (ql) {
+        const textMatch = m.text && m.text.toLowerCase().includes(ql);
+        const authorFallback = !filters.from.length && (
+          (m.authorName && m.authorName.toLowerCase().includes(ql)) ||
+          (m.authorUsername && m.authorUsername.toLowerCase().includes(ql))
+        );
+        if (!textMatch && !authorFallback) return false;
+      }
+      // from: filter
+      if (filters.from.length > 0) {
+        const name = (m.authorName || '').toLowerCase();
+        const uname = (m.authorUsername || '').toLowerCase();
+        if (!filters.from.some(f => name.includes(f) || uname.includes(f))) return false;
+      }
+      // mentions: filter (search index only has plain text)
+      if (filters.mentions.length > 0) {
+        const text = (m.text || '').toLowerCase();
+        if (!filters.mentions.some(f => text.includes('@' + f))) return false;
+      }
+      // date filters (search index uses m.timestamp in ms)
+      if (filters.before !== null && m.timestamp >= filters.before) return false;
+      if (filters.after !== null && m.timestamp <= filters.after) return false;
+      if (filters.during !== null) {
+        const d = new Date(m.timestamp);
+        if (d.getUTCFullYear() !== filters.during.year) return false;
+        if (filters.during.month !== null && d.getUTCMonth() !== filters.during.month) return false;
+      }
+      // has:link (plain text only — image/embed not available in search index)
+      if (filters.has.has('link')) {
+        if (!/https?:\/\//i.test(m.text || '')) return false;
+      }
+      return true;
+    });
     if (hits.length > 0) allResults.push({ channel: ch, messages: hits });
   }
 

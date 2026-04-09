@@ -7,6 +7,7 @@
 
 let searchMode = 'channel'; // 'channel' | 'global'
 let searchIndexCache = {};  // channelId -> parsed index
+let searchSortOrder = 'newest'; // 'newest' | 'oldest'
 
 // Channel search state
 let searchHits = [];        // indices into currentMessages of matching messages
@@ -23,6 +24,7 @@ function initSearch(channelId) {
   const input = document.getElementById('search-input');
   const scopeBtn = document.getElementById('search-scope-btn');
   const clearBtn = document.getElementById('search-clear-btn');
+  const dropdown = document.getElementById('search-dropdown');
   if (!input) return;
 
   // Reset state (navigator hidden by loadChannel already)
@@ -32,10 +34,47 @@ function initSearch(channelId) {
   searchHitSet = new Set();
   currentHitIndex = -1;
 
+  // ── Search dropdown ──────────────────────────────────────
+  if (dropdown) {
+    // Show on focus when input is empty
+    input.addEventListener('focus', () => {
+      if (!input.value.trim()) dropdown.classList.remove('hidden');
+    });
+
+    // Hide on blur (delay to allow item clicks to register)
+    input.addEventListener('blur', () => {
+      setTimeout(() => dropdown.classList.add('hidden'), 160);
+    });
+
+    // Wire up filter item clicks — insert filter token at cursor
+    dropdown.querySelectorAll('.search-dropdown-item[data-filter]').forEach(item => {
+      item.addEventListener('mousedown', e => {
+        e.preventDefault(); // prevent blur before click fires
+        const filter = item.dataset.filter;
+        const pos = input.selectionStart;
+        const before = input.value.slice(0, pos);
+        const after = input.value.slice(pos);
+        // Add space before filter if needed
+        const sep = before.length > 0 && !before.endsWith(' ') ? ' ' : '';
+        input.value = before + sep + filter + after;
+        const newPos = pos + sep.length + filter.length;
+        input.setSelectionRange(newPos, newPos);
+        input.focus();
+        dropdown.classList.add('hidden');
+      });
+    });
+  }
+
   input.oninput = debounce(() => {
     const q = input.value.trim();
     activeSearchTerm = q;
-    if (!q) { clearSearch(); return; }
+    if (!q) {
+      clearSearch();
+      if (clearBtn) clearBtn.classList.add('hidden');
+      if (dropdown) dropdown.classList.remove('hidden');
+      return;
+    }
+    if (dropdown) dropdown.classList.add('hidden');
     if (clearBtn) clearBtn.classList.remove('hidden');
     if (searchMode === 'channel') doChannelSearch(q);
     else doGlobalSearch(q);
@@ -63,7 +102,7 @@ function initSearch(channelId) {
     };
   }
 
-  // Wire up navigator buttons (idempotent — onclick replaces previous)
+  // ── Navigator buttons ────────────────────────────────────
   const prevBtn = document.getElementById('nav-prev');
   const nextBtn = document.getElementById('nav-next');
   const navClear = document.getElementById('nav-clear');
@@ -79,13 +118,34 @@ function initSearch(channelId) {
     };
   }
 
-  // Keyboard shortcuts — attach once per page load
+  // ── Sort buttons ─────────────────────────────────────────
+  const sortNewest = document.getElementById('nav-sort-newest');
+  const sortOldest = document.getElementById('nav-sort-oldest');
+  if (sortNewest) {
+    sortNewest.onclick = () => {
+      if (searchSortOrder === 'newest') return;
+      searchSortOrder = 'newest';
+      sortNewest.classList.add('active');
+      if (sortOldest) sortOldest.classList.remove('active');
+      if (activeSearchTerm && searchMode === 'channel') doChannelSearch(activeSearchTerm);
+    };
+  }
+  if (sortOldest) {
+    sortOldest.onclick = () => {
+      if (searchSortOrder === 'oldest') return;
+      searchSortOrder = 'oldest';
+      sortOldest.classList.add('active');
+      if (sortNewest) sortNewest.classList.remove('active');
+      if (activeSearchTerm && searchMode === 'channel') doChannelSearch(activeSearchTerm);
+    };
+  }
+
+  // ── Keyboard shortcuts ───────────────────────────────────
   if (!keyboardListenerAdded) {
     keyboardListenerAdded = true;
     document.addEventListener('keydown', e => {
       if (!searchHits.length || searchMode !== 'channel') return;
       const key = e.key;
-      // Ctrl+G = next, Ctrl+Shift+G = prev; F3 = next, Shift+F3 = prev
       const isNext = (e.ctrlKey && !e.shiftKey && key === 'g') || (!e.ctrlKey && !e.shiftKey && key === 'F3');
       const isPrev = (e.ctrlKey && e.shiftKey && key === 'g') || (!e.ctrlKey && e.shiftKey && key === 'F3');
       if (isNext || isPrev) {
@@ -132,7 +192,6 @@ function clearSearch() {
 }
 
 function clearSearchHighlights() {
-  // Remove <mark class="search-hit"> tags (unwrap to text)
   const container = document.getElementById('messages-container');
   if (!container) return;
   container.querySelectorAll('mark.search-hit').forEach(mark => {
@@ -141,7 +200,6 @@ function clearSearchHighlights() {
     parent.replaceChild(document.createTextNode(mark.textContent), mark);
     parent.normalize();
   });
-  // Remove hit background class
   container.querySelectorAll('.search-hit-msg').forEach(el => el.classList.remove('search-hit-msg'));
 }
 
@@ -150,17 +208,16 @@ function clearSearchHighlights() {
 function parseSearchQuery(q) {
   const filters = {
     text: '',
-    from: [],      // array of lowercase strings (OR logic)
-    mentions: [],  // array of lowercase strings — messages @mentioning this user
-    before: null,  // ms timestamp (exclusive)
-    after: null,   // ms timestamp (exclusive)
-    during: null,  // { year, month } or { year, month: null }
-    has: new Set(), // 'link' | 'image' | 'embed' | 'file' | 'video' | 'audio' | 'sticker'
-    in: [],        // channel name substrings for global search
-    pinned: null,  // reserved for future use — data not available
+    from: [],
+    mentions: [],
+    before: null,
+    after: null,
+    during: null,
+    has: new Set(),
+    in: [],
+    pinned: null,
   };
 
-  // Extract filter tokens, collect remaining text
   let remaining = q;
   const tokenRe = /\b(from|mentions|before|after|during|has|in|pinned):(\S+)/gi;
   const consumed = [];
@@ -181,7 +238,6 @@ function parseSearchQuery(q) {
       const ms = new Date(val).getTime();
       if (!isNaN(ms)) filters.after = ms;
     } else if (key === 'during') {
-      // YYYY-MM or YYYY
       const mFull = val.match(/^(\d{4})-(\d{1,2})$/);
       const mYear = val.match(/^(\d{4})$/);
       if (mFull) filters.during = { year: parseInt(mFull[1]), month: parseInt(mFull[2]) - 1 };
@@ -191,12 +247,9 @@ function parseSearchQuery(q) {
       if (['link','image','embed','file','video','audio','sticker'].includes(v)) filters.has.add(v);
     } else if (key === 'in') {
       filters.in.push(val.toLowerCase());
-    } else if (key === 'pinned') {
-      // pinned: not yet supported — data not in channel JSON
     }
   }
 
-  // Remove consumed tokens from remaining text
   for (const tok of consumed) {
     remaining = remaining.replace(tok, '');
   }
@@ -217,13 +270,11 @@ function filtersActive(filters) {
 }
 
 function messageMatchesFilters(msg, filters) {
-  // Text match (plainText)
   if (filters.text) {
     const tl = filters.text.toLowerCase();
     if (!msg.plainText || !msg.plainText.toLowerCase().includes(tl)) return false;
   }
 
-  // from: — OR logic across multiple from values
   if (filters.from.length > 0) {
     const name = (msg.authorName || '').toLowerCase();
     const uname = (msg.authorUsername || '').toLowerCase();
@@ -231,18 +282,15 @@ function messageMatchesFilters(msg, filters) {
     if (!matches) return false;
   }
 
-  // before: / after: — timestamp range
   if (filters.before !== null && msg.timestampMs >= filters.before) return false;
   if (filters.after !== null && msg.timestampMs <= filters.after) return false;
 
-  // during: — year and optionally month
   if (filters.during !== null) {
     const d = new Date(msg.timestampMs);
     if (d.getUTCFullYear() !== filters.during.year) return false;
     if (filters.during.month !== null && d.getUTCMonth() !== filters.during.month) return false;
   }
 
-  // has: — AND logic (message must satisfy all specified has filters)
   if (filters.has.has('link')) {
     if (!/https?:\/\//i.test((msg.plainText || '') + (msg.contentHtml || ''))) return false;
   }
@@ -261,7 +309,6 @@ function messageMatchesFilters(msg, filters) {
 function doChannelSearch(q) {
   if (!currentMessages) return;
 
-  // Hide global results panel, show navigator
   const panel = document.getElementById('search-results-panel');
   if (panel) panel.classList.add('hidden');
 
@@ -274,7 +321,6 @@ function doChannelSearch(q) {
     return;
   }
 
-  // Only highlight the text portion (not filter tokens)
   activeHighlightTerm = filters.text;
 
   searchHits = [];
@@ -286,6 +332,12 @@ function doChannelSearch(q) {
       searchHitSet.add(String(currentMessages[i].id));
     }
   }
+
+  // Sort by order preference (messages are chronological so index = time)
+  if (searchSortOrder === 'newest') {
+    searchHits.sort((a, b) => b - a);
+  }
+  // 'oldest' is already ascending (natural order)
 
   showNavigator(searchHits.length);
 
@@ -337,16 +389,13 @@ function jumpToHit(hitIndex) {
   const el = document.getElementById(`msg-${targetMsg.id}`);
   if (el) {
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // Flash highlight (reuse app.js .highlighted class)
     el.classList.remove('highlighted');
-    void el.offsetWidth; // force reflow to restart transition
+    void el.offsetWidth;
     el.classList.add('highlighted');
     setTimeout(() => el.classList.remove('highlighted'), 2000);
     applySearchHighlights();
   } else {
-    // Message not rendered — jumpToIndex will re-render and call afterMessagesRendered
     jumpToIndex(msgIndex);
-    // afterMessagesRendered → applySearchHighlights will be called from the rAF in jumpToIndex
   }
 }
 
@@ -357,7 +406,6 @@ function applySearchHighlights() {
   const container = document.getElementById('messages-container');
   if (!container) return;
 
-  // First clear existing marks (in case of re-render)
   container.querySelectorAll('mark.search-hit').forEach(mark => {
     const parent = mark.parentNode;
     if (!parent) return;
@@ -366,19 +414,16 @@ function applySearchHighlights() {
   });
   container.querySelectorAll('.search-hit-msg').forEach(el => el.classList.remove('search-hit-msg'));
 
-  // Build text regex only from the text portion (not filter tokens)
   const re = activeHighlightTerm
     ? new RegExp(escapeRegex(activeHighlightTerm), 'gi')
     : null;
 
-  // Walk all rendered message containers
   container.querySelectorAll('.message-container').forEach(msgEl => {
     const msgId = msgEl.id.replace(/^msg-/, '');
     if (!searchHitSet.has(msgId)) return;
 
     msgEl.classList.add('search-hit-msg');
 
-    // Highlight text inside .message-content only when there's a text term
     if (re) {
       const contentEl = msgEl.querySelector('.message-content');
       if (contentEl) highlightTextInElement(contentEl, re);
@@ -389,7 +434,6 @@ function applySearchHighlights() {
 function highlightTextInElement(el, re) {
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
     acceptNode(node) {
-      // Skip text inside existing marks, code, and pre elements
       let p = node.parentNode;
       while (p && p !== el) {
         const tag = p.nodeName;
@@ -442,8 +486,14 @@ function escapeRegex(str) {
 
 // ── Global search ─────────────────────────────────────────────
 
+function getAvatarColor(name) {
+  const colors = ['#5865f2','#57f287','#3ba55d','#eb459e','#ed4245','#00b0f4','#f47fff','#faa61a'];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) | 0;
+  return colors[Math.abs(hash) % colors.length];
+}
+
 async function doGlobalSearch(q) {
-  // Clear channel search state
   clearSearchHighlights();
   searchHits = [];
   searchHitSet = new Set();
@@ -455,7 +505,7 @@ async function doGlobalSearch(q) {
   if (panel) { panel.classList.remove('hidden'); panel.innerHTML = '<div class="loading">Searching…</div>'; }
 
   const ql = q.toLowerCase();
-  const allResults = []; // { channel, messages: [] }
+  const allResults = [];
 
   for (const ch of channelList) {
     if (!searchIndexCache[ch.id]) {
@@ -477,13 +527,17 @@ async function doGlobalSearch(q) {
 
   if (!panel) return;
   if (total === 0) {
-    panel.innerHTML = '<div class="search-count">No results found.</div>';
+    panel.innerHTML = '<div class="search-results-header"><span class="search-results-title">Search Results</span><span class="search-results-count">No results</span></div>';
     return;
   }
 
-  let html = `<div class="search-count">${total.toLocaleString()} result${total !== 1 ? 's' : ''} in ${channelCount} channel${channelCount !== 1 ? 's' : ''}</div>`;
+  let html = `<div class="search-results-header">
+    <span class="search-results-title">Search Results</span>
+    <span class="search-results-count">${total.toLocaleString()} result${total !== 1 ? 's' : ''} in ${channelCount} channel${channelCount !== 1 ? 's' : ''}</span>
+    <button class="search-results-close" id="search-results-close" title="Close results">✕</button>
+  </div>`;
 
-  // Channel pills summary
+  // Channel pills
   html += '<div class="search-channel-pills">';
   for (const { channel, messages } of allResults) {
     html += `<button class="search-channel-pill" data-jump-channel="${escapeHtml(channel.id)}" data-search-q="${escapeHtml(q)}">#${escapeHtml(channel.name)} <span class="pill-count">${messages.length.toLocaleString()}</span></button>`;
@@ -496,12 +550,21 @@ async function doGlobalSearch(q) {
       <div class="search-channel-header"># ${escapeHtml(channel.name)} — ${messages.length.toLocaleString()} result${messages.length !== 1 ? 's' : ''}</div>`;
     for (const m of shown) {
       const ts = formatTs(m.timestamp);
-      const snippet = highlightSnippet(truncate(m.text, 120), q);
-      html += `<div class="search-result-item">
-        <span class="search-author">${escapeHtml(m.authorName || m.authorUsername || '?')}</span>
-        <span class="search-ts">${escapeHtml(ts)}</span>
-        <a class="jump-link" href="channel.html#${escapeHtml(channel.id)}" data-jump-channel="${escapeHtml(channel.id)}" data-jump-msg="${escapeHtml(String(m.id))}">Jump →</a>
-        <div class="search-snippet">${snippet}</div>
+      const snippet = highlightSnippet(truncate(m.text, 140), q);
+      const name = m.authorName || m.authorUsername || '?';
+      const initials = name.charAt(0).toUpperCase();
+      const avatarColor = getAvatarColor(name);
+      html += `<div class="search-result-card">
+        <div class="search-result-avatar" style="background:${escapeHtml(avatarColor)}">${escapeHtml(initials)}</div>
+        <div class="search-result-body">
+          <div class="search-result-meta">
+            <span class="search-result-author">${escapeHtml(name)}</span>
+            <span class="search-result-ts">${escapeHtml(ts)}</span>
+            <span class="search-result-channel-tag">#${escapeHtml(channel.name)}</span>
+          </div>
+          <div class="search-result-text">${snippet}</div>
+        </div>
+        <button class="search-result-jump" data-jump-channel="${escapeHtml(channel.id)}" data-jump-msg="${escapeHtml(String(m.id))}">Jump →</button>
       </div>`;
     }
     if (messages.length > 5) {
@@ -512,27 +575,54 @@ async function doGlobalSearch(q) {
 
   panel.innerHTML = html;
 
-  // Wire up channel pill clicks — switch to channel-mode search for that channel
+  // Close button
+  const closeBtn = panel.querySelector('#search-results-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      panel.classList.add('hidden');
+      const inp = document.getElementById('search-input');
+      const clr = document.getElementById('search-clear-btn');
+      if (inp) inp.value = '';
+      if (clr) clr.classList.add('hidden');
+      activeSearchTerm = '';
+      clearSearch();
+    });
+  }
+
+  // Channel pill clicks
   panel.querySelectorAll('[data-jump-channel][data-search-q]').forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault();
       const cid = btn.dataset.jumpChannel;
       const term = btn.dataset.searchQ;
       if (cid === currentChannelId) {
-        // Switch to channel search mode for this channel
         searchMode = 'channel';
         const scopeBtn = document.getElementById('search-scope-btn');
         if (scopeBtn) { scopeBtn.textContent = 'This channel'; scopeBtn.classList.remove('active'); }
         doChannelSearch(term);
       } else {
-        // Navigate to channel and trigger search there
         pendingSearchTerm = term;
         navigateToChannel(cid);
       }
     });
   });
 
-  // Wire up jump links — scroll to specific message
+  // Jump buttons on result cards
+  panel.querySelectorAll('.search-result-jump[data-jump-channel][data-jump-msg]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const cid = btn.dataset.jumpChannel;
+      const mid = btn.dataset.jumpMsg;
+      if (cid === currentChannelId) {
+        scrollToMessage(mid);
+      } else {
+        pendingJumpId = mid;
+        navigateToChannel(cid);
+      }
+    });
+  });
+
+  // Legacy jump links (kept for compat)
   panel.querySelectorAll('a[data-jump-channel][data-jump-msg]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();

@@ -18,30 +18,61 @@
     <div class="main-header">
       <span class="page-title" id="channel-title"># channel</span>
       <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search messages…" autocomplete="off">
-        <button id="search-scope-btn" class="btn-secondary" title="Toggle global search">This channel</button>
-        <button id="search-clear-btn" class="btn-secondary hidden">✕</button>
+        <div class="search-bar-wrap">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="search-input" placeholder="Search messages…" autocomplete="off">
+          <button id="search-scope-btn" class="search-scope-toggle" title="Toggle global search">This channel</button>
+          <button id="search-clear-btn" class="search-bar-clear hidden">✕</button>
+          <div class="search-dropdown hidden" id="search-dropdown">
+            <div class="search-dropdown-header">Search Filters</div>
+            <div class="search-dropdown-item" data-filter="from:">
+              <span class="search-filter-label">FROM</span>
+              <div><div class="search-filter-desc">Messages from a specific author</div><div class="search-filter-example">from:username</div></div>
+            </div>
+            <div class="search-dropdown-item" data-filter="mentions:">
+              <span class="search-filter-label">MENTIONS</span>
+              <div><div class="search-filter-desc">Messages that mention a user</div><div class="search-filter-example">mentions:username</div></div>
+            </div>
+            <div class="search-dropdown-item" data-filter="has:link ">
+              <span class="search-filter-label">HAS</span>
+              <div><div class="search-filter-desc">Messages with specific content</div><div class="search-filter-example">link · image · embed</div></div>
+            </div>
+            <div class="search-dropdown-divider"></div>
+            <div class="search-dropdown-item" data-filter="before:">
+              <span class="search-filter-label sfl-pink">BEFORE</span>
+              <div><div class="search-filter-desc">Messages before a date</div><div class="search-filter-example">before:2024-01-15</div></div>
+            </div>
+            <div class="search-dropdown-item" data-filter="after:">
+              <span class="search-filter-label sfl-green">AFTER</span>
+              <div><div class="search-filter-desc">Messages after a date</div><div class="search-filter-example">after:2024-01-15</div></div>
+            </div>
+            <div class="search-dropdown-item" data-filter="during:">
+              <span class="search-filter-label sfl-yellow">DURING</span>
+              <div><div class="search-filter-desc">Messages during a month or year</div><div class="search-filter-example">during:2024-03 · during:2024</div></div>
+            </div>
+          </div>
+        </div>
         <input type="date" id="date-jump-input" title="Jump to date" class="date-jump-input">
       </div>
     </div>
     <div id="search-results-panel" class="search-results hidden"></div>
     <div id="search-navigator" class="search-navigator hidden">
       <button id="nav-prev" class="nav-btn" title="Previous result (Ctrl+Shift+G / Shift+F3)">‹ Prev</button>
-      <span class="nav-counter" id="nav-counter-wrap">
-        Result <input id="nav-jump-input" class="nav-jump-input" type="number" min="1" value="1"> of <span id="nav-total">0</span>
-      </span>
+      <span class="nav-counter"><span id="nav-counter">0 results</span></span>
       <button id="nav-next" class="nav-btn" title="Next result (Ctrl+G / F3)">Next ›</button>
+      <div class="nav-sort">
+        <button id="nav-sort-newest" class="search-sort-btn active" title="Newest first">Newest</button>
+        <button id="nav-sort-oldest" class="search-sort-btn" title="Oldest first">Oldest</button>
+      </div>
       <button id="nav-clear" class="nav-clear" title="Clear search">✕</button>
     </div>
     <div class="messages-wrapper">
-      <div class="jump-nav-bar" id="jump-nav-bar">
-        <button id="jump-oldest-btn" class="jump-nav-btn" title="Jump to oldest message">⟨⟨ Oldest</button>
-        <button id="jump-newest-btn" class="jump-nav-btn" title="Jump to newest message">Newest ⟩⟩</button>
-      </div>
+      <button id="jump-oldest-btn" class="jump-float-btn jump-float-top" title="Jump to oldest message">↑ Oldest</button>
       <div id="search-hints" class="search-hints hidden"></div>
       <div class="messages-container" id="messages-container">
         <div class="loading" id="messages-loading">Select a channel to view messages.</div>
       </div>
+      <button id="jump-newest-btn" class="jump-float-btn jump-float-bottom" title="Jump to newest message">Newest ↓</button>
     </div>
   </div>
 </div>

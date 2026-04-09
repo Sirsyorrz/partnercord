@@ -120,6 +120,8 @@ function renderMessages(msgs) {
   if (renderOffset < renderMsgs.length) {
     setupScrollSentinel(container);
   }
+
+  requestAnimationFrame(updateFloatBtns);
 }
 
 function setupScrollSentinel(container) {
@@ -241,6 +243,7 @@ function jumpToIndex(index) {
     }
     // Notify search module that messages were re-rendered around a jump target
     if (typeof afterMessagesRendered === 'function') afterMessagesRendered();
+    updateFloatBtns();
   });
 }
 
@@ -359,9 +362,22 @@ function setupDateJump() {
 
 // ── Jump oldest / newest ───────────────────────────────────────
 
+function updateFloatBtns() {
+  const container = document.getElementById('messages-container');
+  const oldestBtn = document.getElementById('jump-oldest-btn');
+  const newestBtn = document.getElementById('jump-newest-btn');
+  if (!container) return;
+  const hasContent = renderMsgs.length > 0;
+  const atTop = container.scrollTop < 80;
+  const atBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 80;
+  if (oldestBtn) oldestBtn.classList.toggle('visible', hasContent && !atTop);
+  if (newestBtn) newestBtn.classList.toggle('visible', hasContent && !atBottom);
+}
+
 function setupJumpButtons() {
   const oldestBtn = document.getElementById('jump-oldest-btn');
   const newestBtn = document.getElementById('jump-newest-btn');
+  const container = document.getElementById('messages-container');
 
   if (oldestBtn) {
     oldestBtn.onclick = () => {
@@ -373,14 +389,18 @@ function setupJumpButtons() {
   if (newestBtn) {
     newestBtn.onclick = () => {
       if (!renderMsgs.length) return;
-      const container = document.getElementById('messages-container');
-      // If all messages already rendered, just scroll to bottom
-      if (!scrollObserver && container) {
-        container.scrollTop = container.scrollHeight;
+      const c = document.getElementById('messages-container');
+      if (!scrollObserver && c) {
+        c.scrollTop = c.scrollHeight;
+        updateFloatBtns();
       } else {
         jumpToIndex(renderMsgs.length - 1);
       }
     };
+  }
+
+  if (container) {
+    container.addEventListener('scroll', updateFloatBtns, { passive: true });
   }
 }
 
